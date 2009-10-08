@@ -1,0 +1,20 @@
+[Desktop Entry]
+Exec=kcmshell4 touchpad
+Icon=preferences-desktop-touchpad
+Type=Service
+X-KDE-ServiceTypes=KCModule,KCModuleInit
+X-DocPath=kcontrol/touchpad/index.html
+
+X-KDE-Library=kcm_touchpad
+X-KDE-PluginKeyword=touchpad
+X-KDE-Init-Symbol=touchpad
+X-KDE-ParentApp=kcontrol
+
+X-KDE-System-Settings-Parent-Category=keyboard-and-mouse
+X-KDE-Weight=50
+
+Name=Touchpad
+
+Comment=Touchpad settings
+
+X-KDE-Keywords=Touchpad,Synaptics
