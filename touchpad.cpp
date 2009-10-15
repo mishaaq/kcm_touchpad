@@ -1,317 +1,349 @@
-#include <QString>
-#include <QRect>
 
-#include <synaptics/pad.h>
+#include <X11/Xdefs.h>
+#include <X11/Xatom.h>
+#include <X11/extensions/XI.h>
+#include <X11/extensions/XInput.h>
+
+#include <strings.h>
+#include <math.h>
+#include <map>
 
 #include "touchpad.h"
 
-using namespace Synaptics;
+int xi_opcode;
 
-static int finger_low[] = {53, 38, 25, 18, 11};
+Display* display   = NULL;
+XDevice* device     = NULL;
 
-
-namespace Touchpad
+struct ltstr
 {
-    QString driverVersion()
-    {
-        return QString::fromStdString(device->driverStr());
+  bool operator()(const char* s1, const char* s2) const
+  {
+    return strcasecmp(s1, s2) < 0;
+  }
+};
+typedef std::map<const char*, struct Parameter*, ltstr> param_hash;
+
+param_hash* parameters_map;
+prop_list* properties_list;
+
+static Display*
+dp_init()
+{
+    XExtensionVersion *v	= NULL;
+    Atom touchpad_type		= 0;
+    Atom synaptics_property	= 0;
+    int error			= 0;
+
+    Display* dpy = XOpenDisplay(NULL);
+    if (!dpy) {
+        fprintf(stderr, "Failed to connect to X Server.\n");
+        error = 1;
+        goto unwind;
     }
 
-    QString libraryVersion()
-    {
-        return QString::fromStdString(device->libraryStr());
+    v = XGetExtensionVersion(dpy, INAME);
+    if (!v->present ||
+        (v->major_version * 1000 + v->minor_version) < (XI_Add_DeviceProperties_Major * 1000
+            + XI_Add_DeviceProperties_Minor)) {
+        fprintf(stderr, "X server supports X Input %d.%d. I need %d.%d.\n",
+                v->major_version, v->minor_version,
+                XI_Add_DeviceProperties_Major,
+                XI_Add_DeviceProperties_Minor);
+        error = 1;
+        goto unwind;
     }
 
-    int isTouchpadEnabled()
-    {
-        return device->getParam(TOUCHPADOFF);
+    /* We know synaptics sets XI_TOUCHPAD for all the devices. */
+    touchpad_type = XInternAtom(dpy, XI_TOUCHPAD, True);
+    if (!touchpad_type) {
+        fprintf(stderr, "XI_TOUCHPAD not initialised.\n");
+        error = 1;
+        goto unwind;
     }
 
-    bool isSmartModeEnabled()
-    {
-        return device->isSynDaemonRunning();
+    synaptics_property = XInternAtom(dpy, SYNAPTICS_PROP_EDGES, True);
+    if (!synaptics_property) {
+        fprintf(stderr, "Couldn't find synaptics properties. No synaptics "
+                "driver loaded?\n");
+        error = 1;
+        goto unwind;
     }
 
-    int sensitivity()
+unwind:
+    XFree(v);
+    if (error && dpy)
     {
-        int i;
-        for(i = 0; i < 5; i++)
-        {
-            if(device->getParam(FINGERLOW) >= finger_low[i])
-                return i;
-        }
-
-        return i - 1;
+        XCloseDisplay(dpy);
+        dpy = NULL;
     }
+    return dpy;
+}
 
-    int absCoordX()
-    {
-        return (int)device->getParam(ABSCOORDX);
-    }
+static XDevice *
+dp_get_device(Display *dpy)
+{
+    XDevice* dev                = NULL;
+    XDeviceInfo *info		= NULL;
+    int ndevices		= 0;
+    Atom touchpad_type		= 0;
+    Atom synaptics_property	= 0;
+    Atom *properties		= NULL;
+    int nprops			= 0;
+    int error			= 0;
 
-    int absCoordY()
-    {
-        return (int)device->getParam(ABSCOORDY);
-    }
+    touchpad_type = XInternAtom(dpy, XI_TOUCHPAD, True);
+    synaptics_property = XInternAtom(dpy, SYNAPTICS_PROP_EDGES, True);
+    info = XListInputDevices(dpy, &ndevices);
 
-    QRect edges()
-    {
-        return QRect(QPoint((int)device->getParam(LEFTEDGE),
-                            (int)device->getParam(TOPEDGE)),
-                     QPoint((int)device->getParam(RIGHTEDGE),
-                            (int)device->getParam(BOTTOMEDGE)));
-    }
+    while(ndevices--) {
+        if (info[ndevices].type == touchpad_type) {
+            dev = XOpenDevice(dpy, info[ndevices].id);
+            if (!dev) {
+                fprintf(stderr, "Failed to open device '%s'.\n",
+                        info[ndevices].name);
+                error = 1;
+                goto unwind;
+            }
 
-    bool isTappingEnabled()
-    {
-        return device->getParam(MAXTAPTIME) > 0;
-    }
+            properties = XListDeviceProperties(dpy, dev, &nprops);
+            if (!properties || !nprops)
+            {
+                fprintf(stderr, "No properties on device '%s'.\n",
+                        info[ndevices].name);
+                error = 1;
+                goto unwind;
+            }
 
-    int tapTime()
-    {
-        return device->getParam(MAXTAPTIME);
-    }
+            while(nprops--)
+            {
+                if (properties[nprops] == synaptics_property)
+                    break;
+            }
+            if (!nprops)
+            {
+                fprintf(stderr, "No synaptics properties on device '%s'.\n",
+                        info[ndevices].name);
+                error = 1;
+                goto unwind;
+            }
 
-    int doubleTapTime()
-    {
-        return device->getParam(MAXDOUBLETAPTIME);
-    }
-
-    Button buttonForTap(TapType type)
-    {
-        Button button;
-        switch(type)
-        {
-            case RightTop:
-                button = (Button)device->getParam(RTCORNERBUTTON);
-                break;
-            case RightBottom:
-                button = (Button)device->getParam(RBCORNERBUTTON);
-                break;
-            case LeftTop:
-                button = (Button)device->getParam(LTCORNERBUTTON);
-                break;
-            case LeftBottom:
-                button = (Button)device->getParam(LBCORNERBUTTON);
-                break;
-            case OneFinger:
-                button = (Button)device->getParam(TAPBUTTON1);
-                break;
-            case TwoFingers:
-                button = (Button)device->getParam(TAPBUTTON2);
-                break;
-            case ThreeFingers:
-                button = (Button)device->getParam(TAPBUTTON3);
-                break;
-            default:
-                button = NoButton;
-        }
-
-        return button;
-    }
-
-    bool areFastTapsEnabled()
-    {
-        return (bool)device->getParam(FASTTAPS);
-    }
-
-    bool isVerticalScrollingEnabled()
-    {
-        return device->getParam(VERTEDGESCROLL) > 0;
-    }
-
-    bool isVerticalTwoFingersScrollingEnabled()
-    {
-        return (bool)device->getParam(VERTTWOFINGERSCROLL);
-    }
-
-    int verticalScrollingDelta()
-    {
-        return (int)device->getParam(VERTSCROLLDELTA);
-    }
-
-    bool isHorizontalScrollingEnabled()
-    {
-        return device->getParam(HORIZEDGESCROLL) > 0;
-    }
-
-    bool isHorizontalTwoFingersScrollingEnabled()
-    {
-        return (bool)device->getParam(HORIZTWOFINGERSCROLL);
-    }
-
-    int horizontalScrollingDelta()
-    {
-        return (int)device->getParam(HORIZSCROLLDELTA);
-    }
-
-    bool isCoastingEnabled()
-    {
-        return device->getParam(CORNERCOASTING);
-    }
-
-    int coastingSpeed()
-    {
-        return device->getParam(COASTINGSPEED) * 2;
-    }
-
-    bool isCircularScrollingEnabled()
-    {
-        return (bool)device->getParam(CIRCULARSCROLLING);
-    }
-
-    int circularScrollingDelta()
-    {
-        return (int)device->getParam(CIRCSCROLLDELTA) * 100;
-    }
-
-    ScrollTrigger circularScrollingTrigger()
-    {
-        return (ScrollTrigger)device->getParam(CIRCSCROLLTRIGGER);
-    }
-
-    bool isEdgeMotionEnabled()
-    {
-        return (bool)device->getParam(EDGEMOTIONUSEALWAYS);
-    }
-
-
-    
-
-    void setTouchpadEnabled(const int type)
-    {
-        device->setParam(TOUCHPADOFF, (double)type);
-    }
-
-    void setSmartModeEnabled(bool enabled, const int time)
-    {
-        //enabled ? device->runSynDaemon(time) : device->killSynDaemonProcesses();
-    }
-    
-    void setSensitivity(const int value)
-    {
-        if(value < 0 || value > 4)
-            return;
-
-        device->setParam(FINGERLOW, finger_low[value]);
-        device->setParam(FINGERHIGH, finger_low[value] + 5);
-    }
-
-    void setEdges(const QRect &rect)
-    {
-        device->setParam(TOPEDGE, rect.top());
-        device->setParam(RIGHTEDGE, rect.right());
-        device->setParam(BOTTOMEDGE, rect.bottom());
-        device->setParam(LEFTEDGE, rect.left());
-    }
-
-    void setTappingEnabled(bool enable)
-    {
-        device->setParam(MAXTAPTIME, enable ? 180 : 0);
-    }
-
-    void setTapTime(int time)
-    {
-        device->setParam(MAXTAPTIME, (double)time);
-    }
-
-    void setDoubleTapTime(int time)
-    {
-        device->setParam(MAXDOUBLETAPTIME, (double)time);
-    }
-
-    void setButtonsForTap(const TapType type, Button button)
-    {
-        switch(type)
-        {
-            case RightTop:
-                device->setParam(RTCORNERBUTTON, button);
-                break;
-            case LeftTop:
-                device->setParam(LTCORNERBUTTON, button);
-                break;
-            case RightBottom:
-                device->setParam(RBCORNERBUTTON, button);
-                break;
-            case LeftBottom:
-                device->setParam(LBCORNERBUTTON, button);
-                break;
-            case OneFinger:
-                device->setParam(TAPBUTTON1, button);
-                break;
-            case TwoFingers:
-                device->setParam(TAPBUTTON2, button);
-                break;
-            case ThreeFingers:
-                device->setParam(TAPBUTTON3, button);
-                break;
-            default:
-                break;
+            break; /* Yay, device is suitable */
         }
     }
 
-    void setFastTapsEnabled(bool enable)
+unwind:
+    XFree(properties);
+    XFreeDeviceList(info);
+    if (!dev)
+        fprintf(stderr, "Unable to find a synaptics device.\n");
+    else if (error && dev)
     {
-        device->setParam(FASTTAPS, (double)enable);
+        XCloseDevice(dpy, dev);
+        dev = NULL;
+    }
+    return dev;
+}
+
+static void*
+dp_get_parameter(Display *dpy, XDevice *dev, const char *name) {
+    Atom a, type, float_type;
+    int format;
+    unsigned long nitems, bytes_after;
+    unsigned char* data;
+    int len;
+
+    union flong *f;
+    long *i;
+    char *b;
+
+    float_type = XInternAtom(dpy, XATOM_FLOAT, True);
+    if (!float_type)
+        fprintf(stderr, "Float properties not available.\n");
+
+    struct Parameter *par = (*parameters_map)[name];
+    a = XInternAtom(dpy, par->prop_name, True);
+    if (!a) {
+        fprintf(stderr, "    %-23s = missing\n", par->name);
+        return NULL;
     }
 
-    void setVerticalScrollingEnabled(bool enable)
-    {
-        device->setParam(VERTEDGESCROLL, (double)enable);
+    len = 1 + ((par->prop_offset * (par->prop_format ? par->prop_format : 32)/8))/4;
+
+    XGetDeviceProperty(dpy, dev, a, 0, len, False,
+                            AnyPropertyType, &type, &format,
+                            &nitems, &bytes_after, &data);
+
+    switch(par->prop_format) {
+        case 8:
+        {
+            if (format != par->prop_format || type != XA_INTEGER) {
+                fprintf(stderr, "   %-23s = format mismatch (%d)\n",
+                        par->name, format);
+                break;
+            }
+
+            b = (char*)data;
+            char* b_value = new char;
+            *b_value = b[par->prop_offset];
+            return b_value;
+            break;
+        }
+        case 32:
+        {
+            if (format != par->prop_format || type != XA_INTEGER) {
+                fprintf(stderr, "   %-23s = format mismatch (%d)\n",
+                        par->name, format);
+                break;
+            }
+
+            i = (long*)data;
+            int* i_value = new int;
+            *i_value = i[par->prop_offset];
+            return i_value;
+            break;
+        }
+        case 0: /* Float */
+        {
+            if (format != 32 || type != float_type) {
+                fprintf(stderr, "   %-23s = format mismatch (%d)\n",
+                        par->name, format);
+                break;
+            }
+
+            f = (union flong*)data;
+            double* d_value = new double;
+            *d_value = f[par->prop_offset].f;
+            return d_value;
+            break;
+        }
     }
 
-    void setVerticalTwoFingersScrollingEnabled(bool enable)
-    {
-        device->setParam(VERTTWOFINGERSCROLL, (double)enable);
+    XFree(data);
+    return 0;
+}
+
+static param_hash*
+dp_prepare_parameters_hash(Display *dpy) {
+    param_hash* parameters_hash = new param_hash;
+
+    int j;
+    for (j = 0; params[j].name; j++) {
+        if (XInternAtom(dpy, params[j].prop_name, True))
+            (*parameters_hash)[params[j].name] = &params[j];
     }
 
-    void setVerticalScrollingDelta(int delta)
-    {
-        device->setParam(VERTSCROLLDELTA, delta);
+    return parameters_hash;
+}
+
+static prop_list*
+dp_prepare_properties_list(Display *dpy) {
+    prop_list* properties_list = new prop_list;
+
+    int j;
+    for (j = 0; params[j].prop_name; j++) {
+        if (XInternAtom(dpy, params[j].prop_name, True))
+            properties_list->push_back(params[j].prop_name);
+        else
+            fprintf(stderr, "Property for '%s' not available. Skipping.\n", params[j].prop_name);
     }
 
-    void setHorizontalScrollingEnabled(bool enable)
-    {
-        device->setParam(HORIZEDGESCROLL, (double)enable);
+    return properties_list;
+}
+
+static void
+dp_set_parameter(Display *dpy, XDevice* dev, const char* name, double var)
+{
+    Atom prop, type, float_type;
+    int format;
+    unsigned char* data;
+    unsigned long nitems, bytes_after;
+
+    union flong *f;
+    long *n;
+    char *b;
+
+    float_type = XInternAtom(dpy, XATOM_FLOAT, True);
+    if (!float_type)
+        fprintf(stderr, "Float properties not available.\n");
+
+    struct Parameter *par = (*parameters_map)[name];
+    prop = XInternAtom(dpy, par->prop_name, True);
+    if (!prop) {
+        fprintf(stderr, "Property for '%s' not available. Skipping.\n", par->name);
     }
 
-    void setHorizontalTwoFingersScrollingEnabled(bool enable)
+    XGetDeviceProperty(dpy, dev, prop, 0, 1000, False, AnyPropertyType,
+                            &type, &format, &nitems, &bytes_after, &data);
+
+    switch(par->prop_format)
     {
-        device->setParam(HORIZTWOFINGERSCROLL, (double)enable);
+        case 8:
+            if (format != par->prop_format || type != XA_INTEGER) {
+                fprintf(stderr, "   %-23s = format mismatch (%d)\n",
+                        par->name, format);
+                break;
+            }
+            b = (char*)data;
+            b[par->prop_offset] = rint(var);
+            break;
+        case 32:
+            if (format != par->prop_format || type != XA_INTEGER) {
+                fprintf(stderr, "   %-23s = format mismatch (%d)\n",
+                        par->name, format);
+                break;
+            }
+            n = (long*)data;
+            n[par->prop_offset] = rint(var);
+            break;
+        case 0: /* float */
+            if (format != 32 || type != float_type) {
+                fprintf(stderr, "   %-23s = format mismatch (%d)\n",
+                        par->name, format);
+                break;
+            }
+            f = (union flong*)data;
+            f[par->prop_offset].f = var;
+            break;
     }
 
-    void setHorizontalScrollingDelta(int delta)
-    {
-        device->setParam(HORIZSCROLLDELTA, delta);
-    }
+    XChangeDeviceProperty(dpy, dev, prop, type, format,
+                            PropModeReplace, data, nitems);
+    XFlush(dpy);
+}
 
-    void setCoastingEnabled(bool enable)
-    {
-        device->setParam(CORNERCOASTING, (double)enable);
-    }
 
-    void setCoastingSpeed(int speed)
-    {
-        device->setParam(COASTINGSPEED, (double)speed / 2);
-    }
+int
+Touchpad::init_xinput_extension() {
+    display = dp_init();
+    device = dp_get_device(display);
 
-    void setCircularScrollingEnabled(bool enable)
-    {
-        device->setParam(CIRCULARSCROLLING, enable);
-    }
+    parameters_map = dp_prepare_parameters_hash(display);
+    properties_list = dp_prepare_properties_list(display);
 
-    void setCircularScrollingDelta(int delta)
-    {
-        device->setParam(CIRCSCROLLDELTA, delta * 0.01);
-    }
+    return 0;
+}
 
-    void setCircularScrollingTrigger(ScrollTrigger trigger)
-    {
-        device->setParam(CIRCSCROLLTRIGGER, (double)trigger);
-    }
+const prop_list*
+Touchpad::get_properties_list() {
+    return properties_list;
+}
 
-    void setEdgeMotionEnabled(bool enable)
-    {
-        device->setParam(EDGEMOTIONUSEALWAYS, enable);
-    }
+const void*
+Touchpad::get_parameter(const char* name) {
+    return dp_get_parameter(display, device, name);
+}
+
+void
+Touchpad::set_parameter(const char* name, double variable) {
+    dp_set_parameter(display, device, name, variable);
+}
+
+int
+Touchpad::free_xinput_extension() {
+    XCloseDevice(display, device);
+    XSync(display, True);
+    XCloseDisplay(display);
+
+    return 0;
 }

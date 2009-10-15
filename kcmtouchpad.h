@@ -1,9 +1,13 @@
-
 #ifndef __KCMTOUCHPAD_H__
 #define __KCMTOUCHPAD_H__
 
+#include <QSet>
+#include <QString>
+
 #include <KApplication>
 #include <KCModule>
+
+#include "touchpad.h"
 
 class Ui_TouchpadConfigWidget;
 
@@ -13,9 +17,8 @@ class TouchpadConfig : public KCModule
 
 public:
     TouchpadConfig(QWidget *parent, const QVariantList &args);
+    ~TouchpadConfig();
 
-    /* poniższe funkcje są wirtualnie udostępniane przez KDE
-     * należy je zdefiniować w module */
     void save();
     void load();
     void defaults();
@@ -25,19 +28,19 @@ public:
     static void init_touchpad();
 
 private:
-    /* funkcja do zmiany parametrów touchpada */
     bool apply();
+    void enableProperties();
 
     Ui_TouchpadConfigWidget* ui;
 
-    /* mapa działań na eventy przycisków */
+    /* map events to button: (event) -> (button) */
     QMap<int, int> tappingButtonsMap;
 
-    /* flaga poprawności zainicjowania pamięci dzielonej */
-    bool valid;
+    QSet<const char*> propertiesList;
+
+    int valid;
     
 private slots:
-    /* sloty odbierające sygnały od kontrolek użytkownika */
     void changed();
 
     void touchpadEnabled(bool toggle);
@@ -47,7 +50,7 @@ private slots:
     void smartModeDelayChanged(int value);
 
     void sensitivityValueChanged(int value);
-    
+
     void scrollVerticalEnabled(bool toggle);
     void scrollVerticalSpeedChanged(int value);
     void scrollVerticalTFEnabled(bool toggle);
@@ -64,8 +67,9 @@ private slots:
     void circularScrollCornersChosen(int chosen);
 
     void tappingEnabled(bool toggle);
-    void tappingTimeChanged(int value);
+    void tappingTimeoutChanged(int value);
     void tappingDoubleTimeChanged(int value);
+    void tappingClickTimeChanged(int value);
 
     void tappingEventListSelected(int current);
     void tappingButtonListSelected(int current);

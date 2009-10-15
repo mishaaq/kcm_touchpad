@@ -21,7 +21,7 @@ target_link_libraries( kcm_touchpad
     ${KDE4_KIO_LIBS} 
 )
 
-target_link_libraries( kcm_touchpad ${X11_LIBRARIES} synaptics )
+target_link_libraries( kcm_touchpad ${X11_LIBRARIES} m X11 Xi )
 
 install( TARGETS kcm_touchpad  DESTINATION ${PLUGIN_INSTALL_DIR} )
 

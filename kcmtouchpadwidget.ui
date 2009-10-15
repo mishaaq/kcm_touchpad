@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>578</width>
-    <height>556</height>
+    <width>568</width>
+    <height>546</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -35,12 +35,21 @@
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="KButtonGroup" name="TouchpadKBG">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="title">
             <string>Touchpad</string>
            </property>
            <layout class="QFormLayout" name="formLayout">
             <item row="0" column="0" colspan="2">
              <widget class="QRadioButton" name="TouchpadOnRB">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="toolTip">
+               <string>Touchpad is enabled.</string>
+              </property>
               <property name="text">
                <string>On</string>
               </property>
@@ -51,6 +60,12 @@
             </item>
             <item row="1" column="0" colspan="2">
              <widget class="QRadioButton" name="TouchpadOffRB">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="toolTip">
+               <string>Touchpad is switched off.</string>
+              </property>
               <property name="text">
                <string>Off</string>
               </property>
@@ -77,46 +92,11 @@
               <property name="enabled">
                <bool>false</bool>
               </property>
+              <property name="toolTip">
+               <string>Only tapping and scrolling is switched off.</string>
+              </property>
               <property name="text">
                <string>Allow moving</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item>
-          <widget class="QGroupBox" name="InformationGB">
-           <property name="title">
-            <string>Informations</string>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <widget class="QLabel" name="DriverVersionL">
-              <property name="text">
-               <string>Synaptics driver version:
-</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QLabel" name="LibraryVersionL">
-              <property name="text">
-               <string>Libsynaptics version:
-</string>
               </property>
              </widget>
             </item>
@@ -127,6 +107,9 @@
        </item>
        <item>
         <widget class="QGroupBox" name="SmartModeGB">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="title">
           <string>Smart Mode</string>
          </property>
@@ -285,6 +268,9 @@
       </layout>
      </widget>
      <widget class="QWidget" name="ScrollingTab">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <attribute name="title">
        <string>Scrolling</string>
       </attribute>
@@ -297,12 +283,15 @@
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="0" column="0" colspan="3">
            <widget class="QCheckBox" name="ScrollVertEnableCB">
+            <property name="toolTip">
+             <string>Enable vertical scrolling when dragging along the right edge.</string>
+            </property>
             <property name="text">
              <string>Enable Vertical Scrolling</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
+          <item row="2" column="0">
            <spacer name="horizontalSpacer_3">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -318,26 +307,29 @@
             </property>
            </spacer>
           </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="ScrollVertSlowL">
+          <item row="2" column="1">
+           <widget class="QLabel" name="ScrollVertHighL">
             <property name="enabled">
              <bool>false</bool>
             </property>
             <property name="text">
-             <string>Slow</string>
+             <string>High</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="2">
+          <item row="2" column="2">
            <widget class="QSlider" name="ScrollVertSpeedS">
             <property name="enabled">
              <bool>false</bool>
             </property>
+            <property name="toolTip">
+             <string>Move distance of the finger for a vertical scroll event.</string>
+            </property>
             <property name="minimum">
-             <number>-255</number>
+             <number>0</number>
             </property>
             <property name="maximum">
-             <number>-5</number>
+             <number>400</number>
             </property>
             <property name="singleStep">
              <number>50</number>
@@ -351,142 +343,57 @@
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
+            <property name="invertedAppearance">
+             <bool>false</bool>
+            </property>
+            <property name="invertedControls">
+             <bool>true</bool>
+            </property>
             <property name="tickPosition">
              <enum>QSlider::TicksBelow</enum>
             </property>
             <property name="tickInterval">
-             <number>50</number>
+             <number>100</number>
             </property>
            </widget>
           </item>
-          <item row="1" column="3">
-           <widget class="QLabel" name="ScrollVertFastL">
+          <item row="2" column="3">
+           <widget class="QLabel" name="ScrollVertLowL">
             <property name="enabled">
              <bool>false</bool>
             </property>
             <property name="text">
-             <string>Fast</string>
+             <string>Low</string>
             </property>
            </widget>
-          </item>
-          <item row="2" column="0" colspan="3">
-           <widget class="QCheckBox" name="ScrollVertTFEnableCB">
-            <property name="text">
-             <string>Enable Two Fingers Vertical Scrolling</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Maximum</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
           </item>
           <item row="4" column="0" colspan="3">
            <widget class="QCheckBox" name="ScrollHorizEnableCB">
+            <property name="toolTip">
+             <string>Enable horizontal scrolling when dragging along the bottom edge.</string>
+            </property>
             <property name="text">
              <string>Enable Horizontal Scrolling</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="0">
-           <spacer name="horizontalSpacer_4">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Maximum</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>18</width>
-              <height>17</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="5" column="1">
-           <widget class="QLabel" name="ScrollHorizSlowL">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Slow</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="2">
-           <widget class="QSlider" name="ScrollHorizSpeedS">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="minimum">
-             <number>-255</number>
-            </property>
-            <property name="maximum">
-             <number>-5</number>
-            </property>
-            <property name="singleStep">
-             <number>50</number>
-            </property>
-            <property name="pageStep">
-             <number>100</number>
-            </property>
-            <property name="tracking">
-             <bool>false</bool>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="tickPosition">
-             <enum>QSlider::TicksBelow</enum>
-            </property>
-            <property name="tickInterval">
-             <number>50</number>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="3">
-           <widget class="QLabel" name="ScrollHorizFastL">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Fast</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="0" colspan="3">
-           <widget class="QCheckBox" name="ScrollHorizTFEnableCB">
-            <property name="text">
-             <string>Enable Horizontal Two Fingers Scrolling</string>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="0" colspan="4">
+          <item row="9" column="0" colspan="4">
            <widget class="QGroupBox" name="ScrollAdvancedGB">
             <property name="title">
              <string>Advanced</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_5">
-             <item row="0" column="0" colspan="3">
+             <item row="0" column="1" colspan="3">
               <widget class="QCheckBox" name="ScrollCoastingEnableCB">
+               <property name="toolTip">
+                <string>Enable vertical scrolling when dragging with two fingers anywhere on the touchpad.</string>
+               </property>
                <property name="text">
                 <string>Enable Coasting</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
+             <item row="3" column="1">
               <spacer name="horizontalSpacer_9">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -502,10 +409,13 @@
                </property>
               </spacer>
              </item>
-             <item row="3" column="2">
+             <item row="3" column="3">
               <widget class="QSlider" name="ScrollCoastingSpeedS">
                <property name="enabled">
                 <bool>false</bool>
+               </property>
+               <property name="toolTip">
+                <string>Coasting threshold scrolling speed.</string>
                </property>
                <property name="minimum">
                 <number>1</number>
@@ -527,17 +437,123 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
-              <widget class="QLabel" name="ScrollCoastingSpeedL">
+             <item row="3" column="2">
+              <widget class="QLabel" name="ScrollCoastingSlowL">
                <property name="enabled">
                 <bool>false</bool>
                </property>
                <property name="text">
-                <string>Coasting Speed:</string>
+                <string>Slow</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="4">
+              <widget class="QLabel" name="ScrollCoastingFastL">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string>Fast</string>
                </property>
               </widget>
              </item>
             </layout>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Maximum</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>18</width>
+              <height>17</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="6" column="2">
+           <widget class="QSlider" name="ScrollHorizSpeedS">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Move distance of the finger for a horizontal scroll event.</string>
+            </property>
+            <property name="minimum">
+             <number>0</number>
+            </property>
+            <property name="maximum">
+             <number>400</number>
+            </property>
+            <property name="singleStep">
+             <number>50</number>
+            </property>
+            <property name="pageStep">
+             <number>100</number>
+            </property>
+            <property name="tracking">
+             <bool>false</bool>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="invertedAppearance">
+             <bool>false</bool>
+            </property>
+            <property name="invertedControls">
+             <bool>true</bool>
+            </property>
+            <property name="tickPosition">
+             <enum>QSlider::TicksBelow</enum>
+            </property>
+            <property name="tickInterval">
+             <number>100</number>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="3">
+           <widget class="QLabel" name="ScrollHorizLowL">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Low</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLabel" name="ScrollHorizHighL">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>High</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="3">
+           <widget class="QCheckBox" name="ScrollVertTFEnableCB">
+            <property name="toolTip">
+             <string>Enable vertical scrolling when dragging with two fingers anywhere on the touchpad.</string>
+            </property>
+            <property name="text">
+             <string>Enable Vertical Two Fingers Scrolling</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0" colspan="3">
+           <widget class="QCheckBox" name="ScrollHorizTFEnableCB">
+            <property name="toolTip">
+             <string>Enable vertical scrolling when dragging with two fingers anywhere on the touchpad.</string>
+            </property>
+            <property name="text">
+             <string>Enable Horizontal Two Fingers Scrolling</string>
+            </property>
            </widget>
           </item>
          </layout>
@@ -545,12 +561,18 @@
        </item>
        <item>
         <widget class="QGroupBox" name="ScrollCircularGB">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="title">
           <string>Circular Scrolling</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
           <item row="0" column="0" colspan="2">
            <widget class="QCheckBox" name="ScrollCircularEnableCB">
+            <property name="toolTip">
+             <string>If on, circular scrolling is used.</string>
+            </property>
             <property name="text">
              <string>Enable Circular Scrolling</string>
             </property>
@@ -572,73 +594,15 @@
             </property>
            </spacer>
           </item>
-          <item row="1" column="1">
-           <layout class="QHBoxLayout" name="horizontalLayout_7">
-            <item>
-             <widget class="QLabel" name="ScrollCircularSlowL">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="text">
-               <string>Slow</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSlider" name="ScrollCircularSpeedS">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="minimum">
-               <number>30</number>
-              </property>
-              <property name="maximum">
-               <number>300</number>
-              </property>
-              <property name="singleStep">
-               <number>30</number>
-              </property>
-              <property name="pageStep">
-               <number>60</number>
-              </property>
-              <property name="value">
-               <number>300</number>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="invertedAppearance">
-               <bool>true</bool>
-              </property>
-              <property name="invertedControls">
-               <bool>false</bool>
-              </property>
-              <property name="tickPosition">
-               <enum>QSlider::TicksBelow</enum>
-              </property>
-              <property name="tickInterval">
-               <number>30</number>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="ScrollCircularFastL">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="text">
-               <string>Fast</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
           <item row="2" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_8">
             <item>
              <widget class="QLabel" name="ScrollCircularUseL">
               <property name="enabled">
                <bool>false</bool>
+              </property>
+              <property name="toolTip">
+               <string>Trigger region on the touchpad to start circular scrolling.</string>
               </property>
               <property name="text">
                <string>Triggered by:</string>
@@ -730,6 +694,70 @@
             </property>
            </spacer>
           </item>
+          <item row="1" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QLabel" name="ScrollCircularSlowL">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Slow</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="ScrollCircularSpeedS">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="toolTip">
+               <string>Move angle (radians) of finger to generate a scroll event.</string>
+              </property>
+              <property name="minimum">
+               <number>30</number>
+              </property>
+              <property name="maximum">
+               <number>300</number>
+              </property>
+              <property name="singleStep">
+               <number>30</number>
+              </property>
+              <property name="pageStep">
+               <number>60</number>
+              </property>
+              <property name="value">
+               <number>300</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="invertedAppearance">
+               <bool>true</bool>
+              </property>
+              <property name="invertedControls">
+               <bool>false</bool>
+              </property>
+              <property name="tickPosition">
+               <enum>QSlider::TicksBelow</enum>
+              </property>
+              <property name="tickInterval">
+               <number>30</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="ScrollCircularFastL">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Fast</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
          </layout>
         </widget>
        </item>
@@ -770,12 +798,15 @@
            </spacer>
           </item>
           <item row="1" column="1">
-           <widget class="QLabel" name="TappingTimeL">
+           <widget class="QLabel" name="TappingTimeoutL">
             <property name="enabled">
              <bool>false</bool>
             </property>
+            <property name="toolTip">
+             <string>Timeout after a tap to recognize it as a single tap.</string>
+            </property>
             <property name="text">
-             <string>Tapping Time:</string>
+             <string>Single Tap Timeout:</string>
             </property>
            </widget>
           </item>
@@ -796,18 +827,18 @@
            </spacer>
           </item>
           <item row="1" column="3">
-           <widget class="QSlider" name="TappingTimeValueS">
+           <widget class="QSlider" name="TappingTimeoutValueS">
             <property name="enabled">
              <bool>false</bool>
             </property>
             <property name="minimum">
-             <number>50</number>
+             <number>0</number>
             </property>
             <property name="maximum">
-             <number>550</number>
+             <number>1000</number>
             </property>
             <property name="singleStep">
-             <number>100</number>
+             <number>20</number>
             </property>
             <property name="pageStep">
              <number>100</number>
@@ -824,7 +855,7 @@
            </widget>
           </item>
           <item row="1" column="5" colspan="2">
-           <widget class="QLabel" name="TappingTimeValueL">
+           <widget class="QLabel" name="TappingTimeoutValueL">
             <property name="enabled">
              <bool>false</bool>
             </property>
@@ -837,7 +868,7 @@
            </widget>
           </item>
           <item row="1" column="7">
-           <widget class="QLabel" name="TappingTimeMilisecondsL">
+           <widget class="QLabel" name="TappingTimeoutMilisecondsL">
             <property name="enabled">
              <bool>false</bool>
             </property>
@@ -852,13 +883,13 @@
              <bool>false</bool>
             </property>
             <property name="minimum">
-             <number>50</number>
+             <number>0</number>
             </property>
             <property name="maximum">
-             <number>550</number>
+             <number>1000</number>
             </property>
             <property name="singleStep">
-             <number>100</number>
+             <number>20</number>
             </property>
             <property name="pageStep">
              <number>100</number>
@@ -869,12 +900,18 @@
             <property name="tickPosition">
              <enum>QSlider::TicksBelow</enum>
             </property>
+            <property name="tickInterval">
+             <number>100</number>
+            </property>
            </widget>
           </item>
           <item row="2" column="1">
            <widget class="QLabel" name="TappingDoubleTimeL">
             <property name="enabled">
              <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Maximum time (in milliseconds) for detecting a double tap.</string>
             </property>
             <property name="text">
              <string>Double Tap Time:</string>
@@ -896,6 +933,70 @@
           </item>
           <item row="2" column="7">
            <widget class="QLabel" name="TappingDoubleTimeMilisecondsL">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>ms.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLabel" name="TappingClickTimeL">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>The duration of the mouse click generated by tapping.</string>
+            </property>
+            <property name="text">
+             <string>Click Time:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QSlider" name="TappingClickTimeValueS">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="maximum">
+             <number>1000</number>
+            </property>
+            <property name="singleStep">
+             <number>20</number>
+            </property>
+            <property name="pageStep">
+             <number>100</number>
+            </property>
+            <property name="sliderPosition">
+             <number>100</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="tickPosition">
+             <enum>QSlider::TicksBelow</enum>
+            </property>
+            <property name="tickInterval">
+             <number>100</number>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="6">
+           <widget class="QLabel" name="TappingClickTimeValueL">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>100</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="7">
+           <widget class="QLabel" name="TappingClickTimeMillisecondsL">
             <property name="enabled">
              <bool>false</bool>
             </property>
@@ -1069,15 +1170,15 @@
      <y>229</y>
     </hint>
     <hint type="destinationlabel">
-     <x>530</x>
-     <y>229</y>
+     <x>527</x>
+     <y>241</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>TappingTimeValueS</sender>
+   <sender>TappingTimeoutValueS</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>TappingTimeValueL</receiver>
+   <receiver>TappingTimeoutValueL</receiver>
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1085,8 +1186,8 @@
      <y>108</y>
     </hint>
     <hint type="destinationlabel">
-     <x>775</x>
-     <y>108</y>
+     <x>524</x>
+     <y>119</y>
     </hint>
    </hints>
   </connection>
@@ -1101,8 +1202,24 @@
      <y>128</y>
     </hint>
     <hint type="destinationlabel">
-     <x>502</x>
-     <y>120</y>
+     <x>524</x>
+     <y>151</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>TappingClickTimeValueS</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>TappingClickTimeValueL</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>386</x>
+     <y>169</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>517</x>
+     <y>178</y>
     </hint>
    </hints>
   </connection>
