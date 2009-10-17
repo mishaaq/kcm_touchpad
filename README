@@ -1,0 +1,24 @@
+PURPOSE:
+kcm_touchpad - KControl module to configure "synaptics" driver-based
+touchpads under GNU/Linux. Version 0.1.0 based on libsynaptics, since 0.2.0
+switched backend to Xinput.
+
+PREREQUISITES:
+* "xorg-input-synaptics" driver (version above 0.14.3)
+* libsynaptics and SHM option turned on (version 0.1.0)
+* Xinput extension (version 0.2.0+)
+* KDE4
+
+INSTALLATION:
+All you need to do is:
+* Unpack the tarball
+* Change current directory to the unpacked one
+* do "mkdir build"
+* do "cd build"
+* run "cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` .."
+* run "make" following by "make install" with superuser rights
+
+UNINSTALLATION:
+Just change current directory to KCM_TOUCHPAD_DIR/build where
+KCM_TOUCHPAD_DIR is unpacked directory out of installation
+process and run "make uninstall" with superuser rights.

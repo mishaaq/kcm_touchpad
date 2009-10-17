@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>568</width>
-    <height>546</height>
+    <width>564</width>
+    <height>542</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -215,6 +215,9 @@
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
            <widget class="QLabel" name="SensitivityLowL">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Low</string>
             </property>
@@ -222,6 +225,9 @@
           </item>
           <item>
            <widget class="QSlider" name="SensitivityValueS">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="maximum">
              <number>4</number>
             </property>
@@ -244,6 +250,9 @@
           </item>
           <item>
            <widget class="QLabel" name="SensitivityHighL">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>High</string>
             </property>
@@ -283,6 +292,9 @@
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="0" column="0" colspan="3">
            <widget class="QCheckBox" name="ScrollVertEnableCB">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="toolTip">
              <string>Enable vertical scrolling when dragging along the right edge.</string>
             </property>
@@ -369,6 +381,9 @@
           </item>
           <item row="4" column="0" colspan="3">
            <widget class="QCheckBox" name="ScrollHorizEnableCB">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="toolTip">
              <string>Enable horizontal scrolling when dragging along the bottom edge.</string>
             </property>
@@ -385,6 +400,9 @@
             <layout class="QGridLayout" name="gridLayout_5">
              <item row="0" column="1" colspan="3">
               <widget class="QCheckBox" name="ScrollCoastingEnableCB">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="toolTip">
                 <string>Enable vertical scrolling when dragging with two fingers anywhere on the touchpad.</string>
                </property>
@@ -538,6 +556,9 @@
           </item>
           <item row="1" column="0" colspan="3">
            <widget class="QCheckBox" name="ScrollVertTFEnableCB">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="toolTip">
              <string>Enable vertical scrolling when dragging with two fingers anywhere on the touchpad.</string>
             </property>
@@ -548,6 +569,9 @@
           </item>
           <item row="5" column="0" colspan="3">
            <widget class="QCheckBox" name="ScrollHorizTFEnableCB">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="toolTip">
              <string>Enable vertical scrolling when dragging with two fingers anywhere on the touchpad.</string>
             </property>
@@ -570,6 +594,9 @@
          <layout class="QGridLayout" name="gridLayout_3">
           <item row="0" column="0" colspan="2">
            <widget class="QCheckBox" name="ScrollCircularEnableCB">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="toolTip">
              <string>If on, circular scrolling is used.</string>
             </property>
@@ -776,6 +803,9 @@
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="0" column="0" colspan="2">
            <widget class="QCheckBox" name="TappingEnableCB">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Enable Tapping</string>
             </property>
@@ -1016,6 +1046,9 @@
          <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
            <widget class="QLabel" name="ButtonTappingL">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>Tapping</string>
             </property>
@@ -1023,6 +1056,9 @@
           </item>
           <item>
            <widget class="QListWidget" name="TappingEventLW">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
               <horstretch>0</horstretch>
@@ -1077,6 +1113,9 @@
           </item>
           <item>
            <widget class="QLabel" name="ButtonMeansL">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="text">
              <string>means</string>
             </property>
@@ -1084,6 +1123,9 @@
           </item>
           <item>
            <widget class="QListWidget" name="TappingButtonLW">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
               <horstretch>0</horstretch>
