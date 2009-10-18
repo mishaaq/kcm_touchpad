@@ -95,6 +95,8 @@ TouchpadConfig::TouchpadConfig(QWidget *parent, const QVariantList &)
     connect(ui->ScrollCoastingEnableCB, SIGNAL(toggled(bool)), this, SLOT(scrollCoastingEnabled(bool)));
     // "Scroll Coasting Speed" slider
     connect(ui->ScrollCoastingSpeedS, SIGNAL(valueChanged(int)), this, SLOT(scrollCoastingSpeedChanged(int)));
+    // "Scroll Corner Coasting Enabled" check box
+    connect(ui->ScrollCoastingCornerEnableCB, SIGNAL(toggled(bool)), this, SLOT(scrollCoastingCornerEnabled(bool)));
 
     // "Circular Scrolling Enabled" check box
     connect(ui->ScrollCircularEnableCB, SIGNAL(toggled(bool)), this, SLOT(circularScrollEnabled(bool)));
@@ -126,34 +128,39 @@ TouchpadConfig::~TouchpadConfig()
 
 void TouchpadConfig::enableProperties() {
     if (this->propertiesList.contains(SYNAPTICS_PROP_OFF)) {
-        ui->TouchpadOnRB->setEnabled(TRUE);
-        ui->TouchpadOffRB->setEnabled(TRUE);
+        ui->TouchpadOnRB->setEnabled(true);
+        ui->TouchpadOffRB->setEnabled(true);
     }
 /*    if (this->propertiesList.contains(SYNAPTICS_PROP_FINGER)) {
-        ui->SensitivityLowL->setEnabled(TRUE);
-        ui->SensitivityValueS->setEnabled(TRUE);
-        ui->SensitivityHighL->setEnabled(TRUE);
+        ui->SensitivityLowL->setEnabled(true);
+        ui->SensitivityValueS->setEnabled(true);
+        ui->SensitivityHighL->setEnabled(true);
     }*/
     if (this->propertiesList.contains(SYNAPTICS_PROP_SCROLL_EDGE)) {
-        ui->ScrollVertEnableCB->setEnabled(TRUE);
-        ui->ScrollHorizEnableCB->setEnabled(TRUE);
-        ui->ScrollCoastingEnableCB->setEnabled(TRUE);
+        ui->ScrollVertEnableCB->setEnabled(true);
+        ui->ScrollHorizEnableCB->setEnabled(true);
+        if (this->propertiesList.contains(SYNAPTICS_PROP_COASTING_SPEED)) {
+            ui->ScrollCoastingCornerEnableCB->setEnabled(true);
+        }
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_SCROLL_TWOFINGER)) {
-        ui->ScrollVertTFEnableCB->setEnabled(TRUE);
-        ui->ScrollHorizTFEnableCB->setEnabled(TRUE);
+        ui->ScrollVertTFEnableCB->setEnabled(true);
+        ui->ScrollHorizTFEnableCB->setEnabled(true);
+    }
+    if (this->propertiesList.contains(SYNAPTICS_PROP_COASTING_SPEED)) {
+        ui->ScrollCoastingEnableCB->setEnabled(true);
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_CIRCULAR_SCROLLING)) {
-        ui->ScrollCircularEnableCB->setEnabled(TRUE);
+        ui->ScrollCircularEnableCB->setEnabled(true);
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_TAP_TIME)) {
-        ui->TappingEnableCB->setEnabled(TRUE);
+        ui->TappingEnableCB->setEnabled(true);
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_TAP_ACTION)) {
-        ui->TappingButtonLW->setEnabled(TRUE);
-        ui->TappingEventLW->setEnabled(TRUE);
-        ui->ButtonTappingL->setEnabled(TRUE);
-        ui->ButtonMeansL->setEnabled(TRUE);
+        ui->TappingButtonLW->setEnabled(true);
+        ui->TappingEventLW->setEnabled(true);
+        ui->ButtonTappingL->setEnabled(true);
+        ui->ButtonMeansL->setEnabled(true);
     }
 }
 
@@ -184,7 +191,9 @@ void TouchpadConfig::load()
     if (this->propertiesList.contains(SYNAPTICS_PROP_SCROLL_EDGE)) {
         ui->ScrollVertEnableCB->setCheckState(config.readEntry("VertEdgeScroll", (int)*(char*)Touchpad::get_parameter("VertEdgeScroll")) ? Qt::Checked : Qt::Unchecked);
         ui->ScrollHorizEnableCB->setCheckState(config.readEntry("HorizEdgeScroll", (int)*(char*)Touchpad::get_parameter("HorizEdgeScroll")) ? Qt::Checked : Qt::Unchecked);
-        ui->ScrollCoastingEnableCB->setCheckState(config.readEntry("CornerCoasting", (int)*(char*)Touchpad::get_parameter("CornerCoasting")) ? Qt::Checked : Qt::Unchecked);
+        if (this->propertiesList.contains(SYNAPTICS_PROP_COASTING_SPEED)) {
+            ui->ScrollCoastingCornerEnableCB->setCheckState(config.readEntry("CornerCoasting", (int)*(char*)Touchpad::get_parameter("CornerCoasting")) ? Qt::Checked : Qt::Unchecked);
+        }
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_SCROLL_DISTANCE)) {
         ui->ScrollVertSpeedS->setValue(config.readEntry("VertScrollDelta", *(int*)Touchpad::get_parameter("VertScrollDelta")));
@@ -195,6 +204,7 @@ void TouchpadConfig::load()
         ui->ScrollHorizTFEnableCB->setCheckState(config.readEntry("HorizTwoFingerScroll", (int)*(char*)Touchpad::get_parameter("HorizTwoFingerScroll")) ? Qt::Checked : Qt::Unchecked);
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_COASTING_SPEED)) {
+        ui->ScrollCoastingEnableCB->setCheckState(config.readEntry("CoastingEnabled", *(double*)Touchpad::get_parameter("CoastingSpeed")) ? Qt::Checked : Qt::Unchecked);
         ui->ScrollCoastingSpeedS->setValue(config.readEntry("CoastingSpeed", *(double*)Touchpad::get_parameter("CoastingSpeed")));
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_CIRCULAR_SCROLLING)) {
@@ -258,7 +268,9 @@ void TouchpadConfig::save()
     if (this->propertiesList.contains(SYNAPTICS_PROP_SCROLL_EDGE)) {
         config.writeEntry("VertEdgeScroll", (int)ui->ScrollVertEnableCB->isChecked());
         config.writeEntry("HorizEdgeScroll", (int)ui->ScrollHorizEnableCB->isChecked());
-        config.writeEntry("CornerCoasting", (int)ui->ScrollCoastingEnableCB->isChecked());
+        if (this->propertiesList.contains(SYNAPTICS_PROP_COASTING_SPEED)) {
+            config.writeEntry("CornerCoasting", (int)ui->ScrollCoastingCornerEnableCB->isChecked());
+        }
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_SCROLL_DISTANCE)) {
         config.writeEntry("VertScrollDelta", ui->ScrollVertSpeedS->value());
@@ -269,6 +281,7 @@ void TouchpadConfig::save()
         config.writeEntry("HorizTwoFingerScroll", (int)ui->ScrollHorizTFEnableCB->isChecked());
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_COASTING_SPEED)) {
+        config.writeEntry("CoastingEnabled", (int)ui->ScrollCoastingEnableCB->isChecked());
         config.writeEntry("CoastingSpeed", (double)ui->ScrollCoastingSpeedS->value());
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_CIRCULAR_SCROLLING)) {
@@ -350,23 +363,21 @@ bool TouchpadConfig::apply()
     if (this->propertiesList.contains(SYNAPTICS_PROP_SCROLL_EDGE)) {
         Touchpad::set_parameter("VertEdgeScroll", ui->ScrollVertEnableCB->isChecked());
         Touchpad::set_parameter("HorizEdgeScroll", ui->ScrollHorizEnableCB->isChecked());
-        Touchpad::set_parameter("CornerCoasting", ui->ScrollCoastingEnableCB->isChecked());
+        if (this->propertiesList.contains(SYNAPTICS_PROP_COASTING_SPEED)) {
+            Touchpad::set_parameter("CornerCoasting", ui->ScrollCoastingCornerEnableCB->isChecked());
+        }
     }
-
     if (this->propertiesList.contains(SYNAPTICS_PROP_SCROLL_DISTANCE)) {
         Touchpad::set_parameter("VertScrollDelta", ui->ScrollVertSpeedS->value());
         Touchpad::set_parameter("HorizScrollDelta", ui->ScrollHorizSpeedS->value());
     }
-
     if (this->propertiesList.contains(SYNAPTICS_PROP_SCROLL_TWOFINGER)) {
         Touchpad::set_parameter("VertTwoFingerScroll", ui->ScrollVertTFEnableCB->isChecked());
         Touchpad::set_parameter("HorizTwoFingerScroll", ui->ScrollHorizTFEnableCB->isChecked());
     }
-
     if (this->propertiesList.contains(SYNAPTICS_PROP_COASTING_SPEED)) {
-        Touchpad::set_parameter("CoastingSpeed", ui->ScrollCoastingSpeedS->value());
+        Touchpad::set_parameter("CoastingSpeed", ui->ScrollCoastingEnableCB->isChecked() ? ui->ScrollCoastingSpeedS->value() : 0.0f);
     }
-
     if (this->propertiesList.contains(SYNAPTICS_PROP_CIRCULAR_SCROLLING)) {
         Touchpad::set_parameter("CircularScrolling", ui->ScrollCircularEnableCB->isChecked());
     }
@@ -430,7 +441,7 @@ void TouchpadConfig::smartModeDelayChanged(int value) {
 }
 
 void TouchpadConfig::sensitivityValueChanged(int value) {
-    emit this->changed();
+//    emit this->changed();
 }
 
 void TouchpadConfig::scrollVerticalEnabled(bool toggle) {
@@ -488,10 +499,15 @@ void TouchpadConfig::scrollCoastingEnabled(bool toggle) {
         ui->ScrollCoastingSlowL->setEnabled(toggle);
         ui->ScrollCoastingFastL->setEnabled(toggle);
         ui->ScrollCoastingSpeedS->setEnabled(toggle);
+        ui->ScrollCoastingCornerEnableCB->setEnabled(toggle);
     }
 }
 
 void TouchpadConfig::scrollCoastingSpeedChanged(int value) {
+    emit this->changed();
+}
+
+void TouchpadConfig::scrollCoastingCornerEnabled(bool toggle) {
     emit this->changed();
 }
 
@@ -587,23 +603,28 @@ void TouchpadConfig::init_touchpad()
 //    Touchpad::setSensitivity(config.readEntry("Sensitivity", Touchpad::get_parameter());
 
     if (propertiesList.contains(SYNAPTICS_PROP_SCROLL_EDGE)) {
-        Touchpad::set_parameter("VertEdgeScroll", config.readEntry("VertEdgeScroll", (int)*(char*)Touchpad::get_parameter("VertEdgeScroll")) ? Qt::Checked : Qt::Unchecked);
-        Touchpad::set_parameter("HorizEdgeScroll", config.readEntry("HorizEdgeScroll", (int)*(char*)Touchpad::get_parameter("HorizEdgeScroll")) ? Qt::Checked : Qt::Unchecked);
+        Touchpad::set_parameter("VertEdgeScroll", config.readEntry("VertEdgeScroll", (int)*(char*)Touchpad::get_parameter("VertEdgeScroll")));
+        Touchpad::set_parameter("HorizEdgeScroll", config.readEntry("HorizEdgeScroll", (int)*(char*)Touchpad::get_parameter("HorizEdgeScroll")));
     }
     if (propertiesList.contains(SYNAPTICS_PROP_SCROLL_DISTANCE)) {
         Touchpad::set_parameter("VertScrollDelta", config.readEntry("VertScrollDelta", *(int*)Touchpad::get_parameter("VertScrollDelta")));
         Touchpad::set_parameter("HorizScrollDelta", config.readEntry("HorizScrollDelta", *(int*)Touchpad::get_parameter("HorizScrollDelta")));
-        Touchpad::set_parameter("CornerCoasting", config.readEntry("CornerCoasting", (int)*(char*)Touchpad::get_parameter("CornerCoasting")) ? Qt::Checked : Qt::Unchecked);
+        if (propertiesList.contains(SYNAPTICS_PROP_COASTING_SPEED)) {
+            Touchpad::set_parameter("CornerCoasting", config.readEntry("CornerCoasting", (int)*(char*)Touchpad::get_parameter("CornerCoasting")));
+        }
     }
     if (propertiesList.contains(SYNAPTICS_PROP_SCROLL_TWOFINGER)) {
-        Touchpad::set_parameter("VertTwoFingerScroll", config.readEntry("VertTwoFingerScroll", (int)*(char*)Touchpad::get_parameter("VertTwoFingerScroll")) ? Qt::Checked : Qt::Unchecked);
-        Touchpad::set_parameter("HorizTwoFingerScroll", config.readEntry("HorizTwoFingerScroll", (int)*(char*)Touchpad::get_parameter("HorizTwoFingerScroll")) ? Qt::Checked : Qt::Unchecked);
+        Touchpad::set_parameter("VertTwoFingerScroll", config.readEntry("VertTwoFingerScroll", (int)*(char*)Touchpad::get_parameter("VertTwoFingerScroll")));
+        Touchpad::set_parameter("HorizTwoFingerScroll", config.readEntry("HorizTwoFingerScroll", (int)*(char*)Touchpad::get_parameter("HorizTwoFingerScroll")));
     }
     if (propertiesList.contains(SYNAPTICS_PROP_COASTING_SPEED)) {
-        Touchpad::set_parameter("CoastingSpeed", config.readEntry("CoastingSpeed", *(double*)Touchpad::get_parameter("CoastingSpeed")));
+        if (config.readEntry("CoastingEnabled", *(double*)Touchpad::get_parameter("CoastingSpeed") > 0.0f))
+            Touchpad::set_parameter("CoastingSpeed", config.readEntry("CoastingSpeed", *(double*)Touchpad::get_parameter("CoastingSpeed")));
+        else
+            Touchpad::set_parameter("CoastingSpeed", 0.0f);
     }
     if (propertiesList.contains(SYNAPTICS_PROP_CIRCULAR_SCROLLING)) {
-        Touchpad::set_parameter("CircularScrolling", config.readEntry("CircularScrolling", (int)*(char*)Touchpad::get_parameter("CircularScrolling")) ? Qt::Checked : Qt::Unchecked);
+        Touchpad::set_parameter("CircularScrolling", config.readEntry("CircularScrolling", (int)*(char*)Touchpad::get_parameter("CircularScrolling")));
     }
     if (propertiesList.contains(SYNAPTICS_PROP_CIRCULAR_SCROLLING_DIST)) {
         Touchpad::set_parameter("CircScrollDelta", config.readEntry("CircScrollDelta", *(double*)Touchpad::get_parameter("CircScrollDelta")));
@@ -612,7 +633,7 @@ void TouchpadConfig::init_touchpad()
         Touchpad::set_parameter("CircScrollTrigger", (Synaptics::ScrollTrigger)config.readEntry("CircScrollTrigger", (int)*(char*)Touchpad::get_parameter("CircScrollTrigger")));
     }
     if (propertiesList.contains(SYNAPTICS_PROP_TAP_DURATIONS)) {
-        Touchpad::set_parameter("MaxTapTime", config.readEntry("MaxTapTime", *(int*)Touchpad::get_parameter("MaxTapTime")) ? Qt::Checked : Qt::Unchecked);
+        Touchpad::set_parameter("MaxTapTime", config.readEntry("MaxTapTime", *(int*)Touchpad::get_parameter("MaxTapTime")));
         Touchpad::set_parameter("SingleTapTimeout", config.readEntry("SingleTapTimeout", *(int*)Touchpad::get_parameter("SingleTapTimeout")));
         Touchpad::set_parameter("MaxDoubleTapTime", config.readEntry("MaxDoubleTapTime", *(int*)Touchpad::get_parameter("MaxDoubleTapTime")));
         Touchpad::set_parameter("ClickTime", config.readEntry("ClickTime", *(int*)Touchpad::get_parameter("ClickTime")));

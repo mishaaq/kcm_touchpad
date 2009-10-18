@@ -86,6 +86,7 @@ private slots:
 
     void scrollCoastingEnabled(bool toggle);
     void scrollCoastingSpeedChanged(int value);
+    void scrollCoastingCornerEnabled(bool toggle);
 
     void circularScrollEnabled(bool toggle);
     void circularScrollSpeedChanged(int value);
