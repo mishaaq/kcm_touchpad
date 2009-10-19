@@ -362,7 +362,8 @@ Touchpad::get_parameter(const char* name) {
 
 void
 Touchpad::set_parameter(const char* name, double variable) {
-    dp_set_parameter(display, device, name, variable);
+    if(variable != -1)
+        dp_set_parameter(display, device, name, variable);
 }
 
 int

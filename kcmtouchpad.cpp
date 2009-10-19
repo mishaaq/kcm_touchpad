@@ -124,6 +124,8 @@ TouchpadConfig::TouchpadConfig(QWidget *parent, const QVariantList &)
 TouchpadConfig::~TouchpadConfig()
 {
     Touchpad::free_xinput_extension();
+    delete(ui);
+    ui = NULL;
 }
 
 void TouchpadConfig::enableProperties() {
@@ -131,11 +133,11 @@ void TouchpadConfig::enableProperties() {
         ui->TouchpadOnRB->setEnabled(true);
         ui->TouchpadOffRB->setEnabled(true);
     }
-/*    if (this->propertiesList.contains(SYNAPTICS_PROP_FINGER)) {
+    if (this->propertiesList.contains(SYNAPTICS_PROP_FINGER)) {
         ui->SensitivityLowL->setEnabled(true);
         ui->SensitivityValueS->setEnabled(true);
         ui->SensitivityHighL->setEnabled(true);
-    }*/
+    }
     if (this->propertiesList.contains(SYNAPTICS_PROP_SCROLL_EDGE)) {
         ui->ScrollVertEnableCB->setEnabled(true);
         ui->ScrollHorizEnableCB->setEnabled(true);
@@ -186,8 +188,9 @@ void TouchpadConfig::load()
     //ui->SmartModeEnableCB->setCheckState(config.readEntry("SmartModeEnabled", false) ? Qt::Checked : Qt::Unchecked);
     //ui->SmartModeDelayS->setValue(config.readEntry("SmartModeDelay", 1000));
 
-//    ui->SensitivityValueS->setValue(config.readEntry("Sensitivity", Touchpad::sensitivity()));
-
+    if (this->propertiesList.contains(SYNAPTICS_PROP_FINGER)) {
+        ui->SensitivityValueS->setValue(config.readEntry("FingerLow", *(int*)Touchpad::get_parameter("FingerLow") / 10));
+    }
     if (this->propertiesList.contains(SYNAPTICS_PROP_SCROLL_EDGE)) {
         ui->ScrollVertEnableCB->setCheckState(config.readEntry("VertEdgeScroll", (int)*(char*)Touchpad::get_parameter("VertEdgeScroll")) ? Qt::Checked : Qt::Unchecked);
         ui->ScrollHorizEnableCB->setCheckState(config.readEntry("HorizEdgeScroll", (int)*(char*)Touchpad::get_parameter("HorizEdgeScroll")) ? Qt::Checked : Qt::Unchecked);
@@ -205,7 +208,7 @@ void TouchpadConfig::load()
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_COASTING_SPEED)) {
         ui->ScrollCoastingEnableCB->setCheckState(config.readEntry("CoastingEnabled", *(double*)Touchpad::get_parameter("CoastingSpeed")) ? Qt::Checked : Qt::Unchecked);
-        ui->ScrollCoastingSpeedS->setValue(config.readEntry("CoastingSpeed", *(double*)Touchpad::get_parameter("CoastingSpeed")));
+        ui->ScrollCoastingSpeedS->setValue(config.readEntry("CoastingSpeed", *(double*)Touchpad::get_parameter("CoastingSpeed") * 100.0f));
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_CIRCULAR_SCROLLING)) {
         ui->ScrollCircularEnableCB->setCheckState(config.readEntry("CircularScrolling", (int)*(char*)Touchpad::get_parameter("CircularScrolling")) ? Qt::Checked : Qt::Unchecked);
@@ -263,8 +266,9 @@ void TouchpadConfig::save()
     //config.writeEntry("SmartModeEnabled", ui->SmartModeEnableCB->isChecked());
     //config.writeEntry("SmartModeDelay", ui->SmartModeDelayS->value());
 
-    //config.writeEntry("Sensitivity", ui->SensitivityValueS->value());
-
+    if (this->propertiesList.contains(SYNAPTICS_PROP_FINGER)) {
+        config.writeEntry("FingerLow", ui->SensitivityValueS->value());
+    }
     if (this->propertiesList.contains(SYNAPTICS_PROP_SCROLL_EDGE)) {
         config.writeEntry("VertEdgeScroll", (int)ui->ScrollVertEnableCB->isChecked());
         config.writeEntry("HorizEdgeScroll", (int)ui->ScrollHorizEnableCB->isChecked());
@@ -358,8 +362,10 @@ bool TouchpadConfig::apply()
 
     //Touchpad::setSmartModeEnabled(ui->SmartModeEnableCB->isChecked(), ui->SmartModeDelayS->value() / 1000);
 
-//    Touchpad::setSensitivity(ui->SensitivityValueS->value());
-
+    if (this->propertiesList.contains(SYNAPTICS_PROP_FINGER)) {
+        Touchpad::set_parameter("FingerLow", ui->SensitivityValueS->value() * 10 + 1);
+        Touchpad::set_parameter("FingerHigh", ui->SensitivityValueS->value() * 10 + 6);
+    }
     if (this->propertiesList.contains(SYNAPTICS_PROP_SCROLL_EDGE)) {
         Touchpad::set_parameter("VertEdgeScroll", ui->ScrollVertEnableCB->isChecked());
         Touchpad::set_parameter("HorizEdgeScroll", ui->ScrollHorizEnableCB->isChecked());
@@ -376,7 +382,7 @@ bool TouchpadConfig::apply()
         Touchpad::set_parameter("HorizTwoFingerScroll", ui->ScrollHorizTFEnableCB->isChecked());
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_COASTING_SPEED)) {
-        Touchpad::set_parameter("CoastingSpeed", ui->ScrollCoastingEnableCB->isChecked() ? ui->ScrollCoastingSpeedS->value() : 0.0f);
+        Touchpad::set_parameter("CoastingSpeed", ui->ScrollCoastingEnableCB->isChecked() ? ui->ScrollCoastingSpeedS->value() / 100.0f : 0.0f);
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_CIRCULAR_SCROLLING)) {
         Touchpad::set_parameter("CircularScrolling", ui->ScrollCircularEnableCB->isChecked());
@@ -407,7 +413,6 @@ bool TouchpadConfig::apply()
 
     return true;
 }
-
 
 
 void TouchpadConfig::changed() {
@@ -441,7 +446,7 @@ void TouchpadConfig::smartModeDelayChanged(int value) {
 }
 
 void TouchpadConfig::sensitivityValueChanged(int value) {
-//    emit this->changed();
+    emit this->changed();
 }
 
 void TouchpadConfig::scrollVerticalEnabled(bool toggle) {
@@ -594,58 +599,60 @@ void TouchpadConfig::init_touchpad()
     }
 
     if (propertiesList.contains(SYNAPTICS_PROP_OFF)) {
-        Touchpad::set_parameter("TouchpadOff", config.readEntry("TouchpadOff", (int)*(char*)Touchpad::get_parameter("TouchpadOff")));
+        Touchpad::set_parameter("TouchpadOff", config.readEntry("TouchpadOff", -1));
     }
 
 //    Touchpad::setSmartModeEnabled(config.readEntry("SmartModeEnabled", Touchpad::isSmartModeEnabled()),
 //                           config.readEntry("SmartModeDelay", 1000));
 
-//    Touchpad::setSensitivity(config.readEntry("Sensitivity", Touchpad::get_parameter());
-
+    if (propertiesList.contains(SYNAPTICS_PROP_FINGER)) {
+        int value;
+        if ((value = config.readEntry("FingerLow", -1)) != -1) {
+            Touchpad::set_parameter("FingerLow", value * 10 + 1);
+            Touchpad::set_parameter("FingerHigh", value * 10 + 6);
+        }
+    }
     if (propertiesList.contains(SYNAPTICS_PROP_SCROLL_EDGE)) {
-        Touchpad::set_parameter("VertEdgeScroll", config.readEntry("VertEdgeScroll", (int)*(char*)Touchpad::get_parameter("VertEdgeScroll")));
-        Touchpad::set_parameter("HorizEdgeScroll", config.readEntry("HorizEdgeScroll", (int)*(char*)Touchpad::get_parameter("HorizEdgeScroll")));
+        Touchpad::set_parameter("VertEdgeScroll", config.readEntry("VertEdgeScroll", -1));
+        Touchpad::set_parameter("HorizEdgeScroll", config.readEntry("HorizEdgeScroll", -1));
     }
     if (propertiesList.contains(SYNAPTICS_PROP_SCROLL_DISTANCE)) {
-        Touchpad::set_parameter("VertScrollDelta", config.readEntry("VertScrollDelta", *(int*)Touchpad::get_parameter("VertScrollDelta")));
-        Touchpad::set_parameter("HorizScrollDelta", config.readEntry("HorizScrollDelta", *(int*)Touchpad::get_parameter("HorizScrollDelta")));
+        Touchpad::set_parameter("VertScrollDelta", config.readEntry("VertScrollDelta", -1));
+        Touchpad::set_parameter("HorizScrollDelta", config.readEntry("HorizScrollDelta", -1));
         if (propertiesList.contains(SYNAPTICS_PROP_COASTING_SPEED)) {
-            Touchpad::set_parameter("CornerCoasting", config.readEntry("CornerCoasting", (int)*(char*)Touchpad::get_parameter("CornerCoasting")));
+            Touchpad::set_parameter("CornerCoasting", config.readEntry("CornerCoasting", -1));
         }
     }
     if (propertiesList.contains(SYNAPTICS_PROP_SCROLL_TWOFINGER)) {
-        Touchpad::set_parameter("VertTwoFingerScroll", config.readEntry("VertTwoFingerScroll", (int)*(char*)Touchpad::get_parameter("VertTwoFingerScroll")));
-        Touchpad::set_parameter("HorizTwoFingerScroll", config.readEntry("HorizTwoFingerScroll", (int)*(char*)Touchpad::get_parameter("HorizTwoFingerScroll")));
+        Touchpad::set_parameter("VertTwoFingerScroll", config.readEntry("VertTwoFingerScroll", -1));
+        Touchpad::set_parameter("HorizTwoFingerScroll", config.readEntry("HorizTwoFingerScroll", -1));
     }
     if (propertiesList.contains(SYNAPTICS_PROP_COASTING_SPEED)) {
-        if (config.readEntry("CoastingEnabled", *(double*)Touchpad::get_parameter("CoastingSpeed") > 0.0f))
-            Touchpad::set_parameter("CoastingSpeed", config.readEntry("CoastingSpeed", *(double*)Touchpad::get_parameter("CoastingSpeed")));
-        else
-            Touchpad::set_parameter("CoastingSpeed", 0.0f);
+        Touchpad::set_parameter("CoastingSpeed", config.readEntry("CoastingSpeed", -1));
     }
     if (propertiesList.contains(SYNAPTICS_PROP_CIRCULAR_SCROLLING)) {
-        Touchpad::set_parameter("CircularScrolling", config.readEntry("CircularScrolling", (int)*(char*)Touchpad::get_parameter("CircularScrolling")));
+        Touchpad::set_parameter("CircularScrolling", config.readEntry("CircularScrolling", -1));
     }
     if (propertiesList.contains(SYNAPTICS_PROP_CIRCULAR_SCROLLING_DIST)) {
-        Touchpad::set_parameter("CircScrollDelta", config.readEntry("CircScrollDelta", *(double*)Touchpad::get_parameter("CircScrollDelta")));
+        Touchpad::set_parameter("CircScrollDelta", config.readEntry("CircScrollDelta", -1));
     }
     if (propertiesList.contains(SYNAPTICS_PROP_CIRCULAR_SCROLLING_TRIGGER)) {
-        Touchpad::set_parameter("CircScrollTrigger", (Synaptics::ScrollTrigger)config.readEntry("CircScrollTrigger", (int)*(char*)Touchpad::get_parameter("CircScrollTrigger")));
+        Touchpad::set_parameter("CircScrollTrigger", (Synaptics::ScrollTrigger)config.readEntry("CircScrollTrigger", -1));
     }
     if (propertiesList.contains(SYNAPTICS_PROP_TAP_DURATIONS)) {
-        Touchpad::set_parameter("MaxTapTime", config.readEntry("MaxTapTime", *(int*)Touchpad::get_parameter("MaxTapTime")));
-        Touchpad::set_parameter("SingleTapTimeout", config.readEntry("SingleTapTimeout", *(int*)Touchpad::get_parameter("SingleTapTimeout")));
-        Touchpad::set_parameter("MaxDoubleTapTime", config.readEntry("MaxDoubleTapTime", *(int*)Touchpad::get_parameter("MaxDoubleTapTime")));
-        Touchpad::set_parameter("ClickTime", config.readEntry("ClickTime", *(int*)Touchpad::get_parameter("ClickTime")));
+        Touchpad::set_parameter("MaxTapTime", config.readEntry("MaxTapTime", -1));
+        Touchpad::set_parameter("SingleTapTimeout", config.readEntry("SingleTapTimeout", -1));
+        Touchpad::set_parameter("MaxDoubleTapTime", config.readEntry("MaxDoubleTapTime", -1));
+        Touchpad::set_parameter("ClickTime", config.readEntry("ClickTime", -1));
     }
     if (propertiesList.contains(SYNAPTICS_PROP_TAP_ACTION)) {
-        Touchpad::set_parameter("TapButton1", (Synaptics::Button)config.readEntry("TapButton1", (int)*(char*)Touchpad::get_parameter("TapButton1")));
-        Touchpad::set_parameter("TapButton2", (Synaptics::Button)config.readEntry("TapButton2", (int)*(char*)Touchpad::get_parameter("TapButton2")));
-        Touchpad::set_parameter("TapButton3", (Synaptics::Button)config.readEntry("TapButton3", (int)*(char*)Touchpad::get_parameter("TapButton3")));
-        Touchpad::set_parameter("RTCornerButton", (Synaptics::Button)config.readEntry("RTCornerButton", (int)*(char*)Touchpad::get_parameter("RTCornerButton")));
-        Touchpad::set_parameter("RBCornerButton", (Synaptics::Button)config.readEntry("RBCornerButton", (int)*(char*)Touchpad::get_parameter("RBCornerButton")));
-        Touchpad::set_parameter("LTCornerButton", (Synaptics::Button)config.readEntry("LTCornerButton", (int)*(char*)Touchpad::get_parameter("LTCornerButton")));
-        Touchpad::set_parameter("LBCornerButton", (Synaptics::Button)config.readEntry("LBCornerButton", (int)*(char*)Touchpad::get_parameter("LBCornerButton")));
+        Touchpad::set_parameter("TapButton1", (Synaptics::Button)config.readEntry("TapButton1", -1));
+        Touchpad::set_parameter("TapButton2", (Synaptics::Button)config.readEntry("TapButton2", -1));
+        Touchpad::set_parameter("TapButton3", (Synaptics::Button)config.readEntry("TapButton3", -1));
+        Touchpad::set_parameter("RTCornerButton", (Synaptics::Button)config.readEntry("RTCornerButton", -1));
+        Touchpad::set_parameter("RBCornerButton", (Synaptics::Button)config.readEntry("RBCornerButton", -1));
+        Touchpad::set_parameter("LTCornerButton", (Synaptics::Button)config.readEntry("LTCornerButton", -1));
+        Touchpad::set_parameter("LBCornerButton", (Synaptics::Button)config.readEntry("LBCornerButton", -1));
     }
 
     Touchpad::free_xinput_extension();

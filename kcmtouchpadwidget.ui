@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>560</width>
-    <height>538</height>
+    <width>550</width>
+    <height>528</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -229,10 +229,13 @@
              <bool>false</bool>
             </property>
             <property name="maximum">
-             <number>4</number>
+             <number>20</number>
+            </property>
+            <property name="singleStep">
+             <number>2</number>
             </property>
             <property name="pageStep">
-             <number>1</number>
+             <number>5</number>
             </property>
             <property name="sliderPosition">
              <number>1</number>
@@ -440,6 +443,9 @@
                </property>
                <property name="maximum">
                 <number>40</number>
+               </property>
+               <property name="pageStep">
+                <number>10</number>
                </property>
                <property name="tracking">
                 <bool>false</bool>
