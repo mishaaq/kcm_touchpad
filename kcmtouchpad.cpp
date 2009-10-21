@@ -107,6 +107,8 @@ TouchpadConfig::TouchpadConfig(QWidget *parent, const QVariantList &)
 
     // "Tapping Enabled" check box
     connect(ui->TappingEnableCB, SIGNAL(toggled(bool)), this, SLOT(tappingEnabled(bool)));
+    // "Tapping Max Move" slider
+    connect(ui->TappingMaxMoveValueS, SIGNAL(valueChanged(int)), this, SLOT(tappingMaxMoveChanged(int)));
     // "Tapping Delay Timeout" slider
     connect(ui->TappingTimeoutValueS, SIGNAL(valueChanged(int)), this, SLOT(tappingTimeoutChanged(int)));
     // "Double Tapping Delay Time" slider
@@ -222,6 +224,9 @@ void TouchpadConfig::load()
     if (this->propertiesList.contains(SYNAPTICS_PROP_TAP_TIME)) {
         ui->TappingEnableCB->setCheckState(config.readEntry("MaxTapTime", *(int*)Touchpad::get_parameter("MaxTapTime")) ? Qt::Checked : Qt::Unchecked);
     }
+    if (this->propertiesList.contains(SYNAPTICS_PROP_TAP_MOVE)) {
+        ui->TappingMaxMoveValueS->setValue(config.readEntry("MaxTapMove", *(int*)Touchpad::get_parameter("MaxTapMove")));
+    }
     if (this->propertiesList.contains(SYNAPTICS_PROP_TAP_DURATIONS)) {
         ui->TappingTimeoutValueS->setValue(config.readEntry("SingleTapTimeout", *(int*)Touchpad::get_parameter("SingleTapTimeout")));
         ui->TappingDoubleTimeValueS->setValue(config.readEntry("MaxDoubleTapTime", *(int*)Touchpad::get_parameter("MaxDoubleTapTime")));
@@ -299,6 +304,9 @@ void TouchpadConfig::save()
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_TAP_TIME)) {
         config.writeEntry("MaxTapTime", (int)ui->TappingEnableCB->isChecked() * 180);
+    }
+    if (this->propertiesList.contains(SYNAPTICS_PROP_TAP_MOVE)) {
+        config.writeEntry("MaxTapMove", ui->TappingMaxMoveValueS->value());
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_TAP_DURATIONS)) {
         config.writeEntry("SingleTapTimeout", ui->TappingTimeoutValueS->value());
@@ -395,6 +403,9 @@ bool TouchpadConfig::apply()
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_TAP_TIME)) {
         Touchpad::set_parameter("MaxTapTime", (int)ui->TappingEnableCB->isChecked() * 180);
+    }
+    if (this->propertiesList.contains(SYNAPTICS_PROP_TAP_MOVE)) {
+        Touchpad::set_parameter("MaxTapMove", ui->TappingMaxMoveValueS->value());
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_TAP_DURATIONS)) {
         Touchpad::set_parameter("SingleTapTimeout", ui->TappingTimeoutValueS->value());
@@ -541,6 +552,12 @@ void TouchpadConfig::circularScrollCornersChosen(int chosen) {
 void TouchpadConfig::tappingEnabled(bool toggle) {
     emit this->changed();
 
+    if (this->propertiesList.contains(SYNAPTICS_PROP_TAP_MOVE)) {
+        ui->TappingMaxMoveL->setEnabled(toggle);
+        ui->TappingMaxMoveValueS->setEnabled(toggle);
+        ui->TappingMaxMoveValueL->setEnabled(toggle);
+        ui->TappingMaxMovePointsL->setEnabled(toggle);
+    }
     if (this->propertiesList.contains(SYNAPTICS_PROP_TAP_DURATIONS)) {
         ui->TappingTimeoutL->setEnabled(toggle);
         ui->TappingTimeoutValueS->setEnabled(toggle);
@@ -555,6 +572,10 @@ void TouchpadConfig::tappingEnabled(bool toggle) {
         ui->TappingClickTimeValueL->setEnabled(toggle);
         ui->TappingClickTimeMillisecondsL->setEnabled(toggle);
     }
+}
+
+void TouchpadConfig::tappingMaxMoveChanged(int value) {
+    emit this->changed();
 }
 
 void TouchpadConfig::tappingTimeoutChanged(int value) {
@@ -638,6 +659,9 @@ void TouchpadConfig::init_touchpad()
     }
     if (propertiesList.contains(SYNAPTICS_PROP_CIRCULAR_SCROLLING_TRIGGER)) {
         Touchpad::set_parameter("CircScrollTrigger", (Synaptics::ScrollTrigger)config.readEntry("CircScrollTrigger", -1));
+    }
+    if (propertiesList.contains(SYNAPTICS_PROP_TAP_MOVE)) {
+        Touchpad::set_parameter("MaxTapMove", config.readEntry("MaxTapMove", -1 ));
     }
     if (propertiesList.contains(SYNAPTICS_PROP_TAP_DURATIONS)) {
         Touchpad::set_parameter("MaxTapTime", config.readEntry("MaxTapTime", -1));

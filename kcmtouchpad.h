@@ -93,6 +93,7 @@ private slots:
     void circularScrollCornersChosen(int chosen);
 
     void tappingEnabled(bool toggle);
+    void tappingMaxMoveChanged(int value);
     void tappingTimeoutChanged(int value);
     void tappingDoubleTimeChanged(int value);
     void tappingClickTimeChanged(int value);

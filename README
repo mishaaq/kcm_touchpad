@@ -5,7 +5,7 @@ switched backend to Xinput.
 
 PREREQUISITES:
 * "xorg-input-synaptics" driver (version above 0.14.3)
-* libsynaptics and SHM option turned on (version 0.1.0)
+* libsynaptics and SHM option turned on (only with version 0.1.0)
 * Xinput extension (version 0.2.0+)
 * KDE4
 

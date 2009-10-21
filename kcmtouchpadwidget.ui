@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>550</width>
-    <height>528</height>
+    <width>548</width>
+    <height>526</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -830,7 +830,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0" rowspan="4">
+          <item row="1" column="0" rowspan="5">
            <spacer name="horizontalSpacer_8">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -846,7 +846,7 @@
             </property>
            </spacer>
           </item>
-          <item row="1" column="1">
+          <item row="2" column="1">
            <widget class="QLabel" name="TappingTimeoutL">
             <property name="enabled">
              <bool>false</bool>
@@ -859,7 +859,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="2" rowspan="4">
+          <item row="1" column="2" rowspan="5">
            <spacer name="horizontalSpacer_10">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -875,7 +875,7 @@
             </property>
            </spacer>
           </item>
-          <item row="1" column="3">
+          <item row="2" column="3">
            <widget class="QSlider" name="TappingTimeoutValueS">
             <property name="enabled">
              <bool>false</bool>
@@ -903,7 +903,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="5" colspan="2">
+          <item row="2" column="5" colspan="2">
            <widget class="QLabel" name="TappingTimeoutValueL">
             <property name="enabled">
              <bool>false</bool>
@@ -916,7 +916,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="7">
+          <item row="2" column="7">
            <widget class="QLabel" name="TappingTimeoutMilisecondsL">
             <property name="enabled">
              <bool>false</bool>
@@ -926,7 +926,7 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="3">
+          <item row="3" column="3">
            <widget class="QSlider" name="TappingDoubleTimeValueS">
             <property name="enabled">
              <bool>false</bool>
@@ -954,7 +954,7 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="3" column="1">
            <widget class="QLabel" name="TappingDoubleTimeL">
             <property name="enabled">
              <bool>false</bool>
@@ -967,7 +967,7 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="6">
+          <item row="3" column="6">
            <widget class="QLabel" name="TappingDoubleTimeValueL">
             <property name="enabled">
              <bool>false</bool>
@@ -980,7 +980,7 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="7">
+          <item row="3" column="7">
            <widget class="QLabel" name="TappingDoubleTimeMilisecondsL">
             <property name="enabled">
              <bool>false</bool>
@@ -990,7 +990,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="4" column="1">
            <widget class="QLabel" name="TappingClickTimeL">
             <property name="enabled">
              <bool>false</bool>
@@ -1003,7 +1003,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="3">
+          <item row="4" column="3">
            <widget class="QSlider" name="TappingClickTimeValueS">
             <property name="enabled">
              <bool>false</bool>
@@ -1034,7 +1034,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="6">
+          <item row="4" column="6">
            <widget class="QLabel" name="TappingClickTimeValueL">
             <property name="enabled">
              <bool>false</bool>
@@ -1044,13 +1044,68 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="7">
+          <item row="4" column="7">
            <widget class="QLabel" name="TappingClickTimeMillisecondsL">
             <property name="enabled">
              <bool>false</bool>
             </property>
             <property name="text">
              <string>ms.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QSlider" name="TappingMaxMoveValueS">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="maximum">
+             <number>1500</number>
+            </property>
+            <property name="singleStep">
+             <number>100</number>
+            </property>
+            <property name="pageStep">
+             <number>250</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="tickPosition">
+             <enum>QSlider::TicksBelow</enum>
+            </property>
+            <property name="tickInterval">
+             <number>150</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="TappingMaxMoveL">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Max Tap Move:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="6">
+           <widget class="QLabel" name="TappingMaxMoveValueL">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>100</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="7">
+           <widget class="QLabel" name="TappingMaxMovePointsL">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>pts.</string>
             </property>
            </widget>
           </item>
@@ -1231,7 +1286,7 @@
      <y>229</y>
     </hint>
     <hint type="destinationlabel">
-     <x>527</x>
+     <x>503</x>
      <y>241</y>
     </hint>
    </hints>
@@ -1243,12 +1298,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>321</x>
-     <y>108</y>
+     <x>467</x>
+     <y>151</y>
     </hint>
     <hint type="destinationlabel">
-     <x>524</x>
-     <y>119</y>
+     <x>500</x>
+     <y>151</y>
     </hint>
    </hints>
   </connection>
@@ -1259,12 +1314,12 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>291</x>
-     <y>128</y>
+     <x>467</x>
+     <y>183</y>
     </hint>
     <hint type="destinationlabel">
-     <x>524</x>
-     <y>151</y>
+     <x>500</x>
+     <y>183</y>
     </hint>
    </hints>
   </connection>
@@ -1275,12 +1330,28 @@
    <slot>setNum(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>386</x>
-     <y>169</y>
+     <x>467</x>
+     <y>215</y>
     </hint>
     <hint type="destinationlabel">
-     <x>517</x>
-     <y>178</y>
+     <x>500</x>
+     <y>215</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>TappingMaxMoveValueS</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>TappingMaxMoveValueL</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>434</x>
+     <y>104</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>492</x>
+     <y>110</y>
     </hint>
    </hints>
   </connection>

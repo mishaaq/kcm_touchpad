@@ -372,5 +372,8 @@ Touchpad::free_xinput_extension() {
     XSync(display, True);
     XCloseDisplay(display);
 
+    free(parameters_map);
+    free(properties_list);
+
     return 0;
 }
