@@ -34,6 +34,10 @@
 
 #include "synaptics-properties.h"
 
+#define GET_DISPLAY_FAILED -1
+#define GET_DEVICE_FAILED -2
+
+
 #ifndef XATOM_FLOAT
 #define XATOM_FLOAT "FLOAT"
 #endif
@@ -140,6 +144,7 @@ static struct Parameter params[] = {
 };
 
 namespace Touchpad {
+
     int init_xinput_extension();
     int free_xinput_extension();
 

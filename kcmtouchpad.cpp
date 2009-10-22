@@ -49,20 +49,28 @@ K_PLUGIN_FACTORY(TouchpadConfigFactory, registerPlugin<TouchpadConfig>("touchpad
 K_EXPORT_PLUGIN(TouchpadConfigFactory("kcmtouchpad"))
 
 TouchpadConfig::TouchpadConfig(QWidget *parent, const QVariantList &)
-        : KCModule(TouchpadConfigFactory::componentData(), parent)
+        : KCModule(TouchpadConfigFactory::componentData(), parent), setup_failed(false)
 {
     // Load translations
     KGlobal::locale()->insertCatalog("kcm_touchpad");
 
-    if (Touchpad::init_xinput_extension()) {
-        valid = 0;
-        return;
+    int returnValue;
+    if ((returnValue = Touchpad::init_xinput_extension()) < 0) {
+        switch (returnValue) {
+            case GET_DISPLAY_FAILED: KMessageBox::error(parent, i18n("Could not get display! Are you running in X environment?"), i18n("Error"));
+                                     break;
+            case GET_DEVICE_FAILED: KMessageBox::error(parent, i18n("Could not get device! Is \"synaptics\" driver installed and loaded?"), i18n("Error"));
+                                    break;
+            default: KMessageBox::error(parent, i18n("Unknown error!"), i18n("Error"));
+        }
+        setup_failed = true;
     }
 
     const prop_list* properties_list = Touchpad::get_properties_list();
-    for (prop_list::const_iterator it = properties_list->begin(); it != properties_list->end(); it++) {
-        this->propertiesList.insert(*it);
-    }
+    if (properties_list)
+        for (prop_list::const_iterator it = properties_list->begin(); it != properties_list->end(); it++) {
+            this->propertiesList.insert(*it);
+        }
 
     // set user interface
     ui = new Ui_TouchpadConfigWidget();
@@ -124,8 +132,6 @@ TouchpadConfig::TouchpadConfig(QWidget *parent, const QVariantList &)
     connect(ui->TappingEventLW, SIGNAL(currentRowChanged(int)), this, SLOT(tappingEventListSelected(int)));
     // "Corresponding Button" list widget
     connect(ui->TappingButtonLW, SIGNAL(currentRowChanged(int)), this, SLOT(tappingButtonListSelected(int)));
-
-    valid = 1;
 }
 
 TouchpadConfig::~TouchpadConfig()
@@ -179,7 +185,7 @@ void TouchpadConfig::enableProperties() {
  */
 void TouchpadConfig::load()
 {
-    if (!valid)
+    if (setup_failed)
         return;
 
     KConfigGroup config(KSharedConfig::openConfig("kcmtouchpadrc", KConfig::NoGlobals), "Touchpad");
@@ -254,7 +260,7 @@ void TouchpadConfig::load()
  */
 void TouchpadConfig::save()
 {
-    if (!valid)
+    if (setup_failed)
         return;
 
     if(apply() == false)
@@ -613,9 +619,10 @@ void TouchpadConfig::tappingButtonListSelected(int current)
  */
 void TouchpadConfig::init_touchpad()
 {
-    if (Touchpad::init_xinput_extension()) {
+    if (Touchpad::init_xinput_extension() < 0) {
         return;
     }
+
     KConfigGroup config(KSharedConfig::openConfig( "kcmtouchpadrc" ), "Touchpad");
 
     QList<const char*> propertiesList;

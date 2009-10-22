@@ -10,7 +10,7 @@ msgstr ""
 #. i18n: ectx: attribute (title), widget (QWidget, GeneralTab)
 #: rc.cpp:3 rc.cpp:273
 msgid "General"
-msgstr ""
+msgstr "Ogólne"
 
 #. i18n: file: kcmtouchpadwidget.ui:41
 #. i18n: ectx: property (title), widget (KButtonGroup, TouchpadKBG)

@@ -16,7 +16,7 @@ msgstr ""
 #. i18n: ectx: property (title), widget (KButtonGroup, TouchpadKBG)
 #: rc.cpp:6 rc.cpp:276
 msgid "Touchpad"
-msgstr ""
+msgstr "Touchpad"
 
 #. i18n: file: kcmtouchpadwidget.ui:50
 #. i18n: ectx: property (toolTip), widget (QRadioButton, TouchpadOnRB)

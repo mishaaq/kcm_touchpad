@@ -50,8 +50,8 @@ struct ltstr
 };
 typedef std::map<const char*, struct Parameter*, ltstr> param_hash;
 
-param_hash* parameters_map;
-prop_list* properties_list;
+param_hash* parameters_map = NULL;
+prop_list* properties_list = NULL;
 
 static Display*
 dp_init()
@@ -342,7 +342,12 @@ dp_set_parameter(Display *dpy, XDevice* dev, const char* name, double var)
 int
 Touchpad::init_xinput_extension() {
     display = dp_init();
+    if (display == NULL)
+        return GET_DISPLAY_FAILED;
+
     device = dp_get_device(display);
+    if (device == NULL)
+        return GET_DEVICE_FAILED;
 
     parameters_map = dp_prepare_parameters_hash(display);
     properties_list = dp_prepare_properties_list(display);
@@ -357,20 +362,23 @@ Touchpad::get_properties_list() {
 
 const void*
 Touchpad::get_parameter(const char* name) {
-    return dp_get_parameter(display, device, name);
+    if (display && device)
+        return dp_get_parameter(display, device, name);
 }
 
 void
 Touchpad::set_parameter(const char* name, double variable) {
-    if(variable != -1)
+    if (display && device && variable != -1)
         dp_set_parameter(display, device, name, variable);
 }
 
 int
 Touchpad::free_xinput_extension() {
-    XCloseDevice(display, device);
-    XSync(display, True);
-    XCloseDisplay(display);
+    if (display && device) {
+        XCloseDevice(display, device);
+        XSync(display, True);
+        XCloseDisplay(display);
+    }
 
     free(parameters_map);
     free(properties_list);

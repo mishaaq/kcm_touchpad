@@ -63,7 +63,7 @@ private:
 
     QSet<const char*> propertiesList;
 
-    int valid;
+    bool setup_failed;
     
 private slots:
     void changed();
