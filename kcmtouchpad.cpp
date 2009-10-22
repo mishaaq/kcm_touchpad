@@ -36,7 +36,7 @@
 #include <KPluginFactory>
 #include <KPluginLoader>
 #include <KMessageBox>
-#include <KLocale>
+#include <KLocalizedString>
 
 #include <math.h>
 
@@ -51,6 +51,9 @@ K_EXPORT_PLUGIN(TouchpadConfigFactory("kcmtouchpad"))
 TouchpadConfig::TouchpadConfig(QWidget *parent, const QVariantList &)
         : KCModule(TouchpadConfigFactory::componentData(), parent)
 {
+    // Load translations
+    KGlobal::locale()->insertCatalog("kcm_touchpad");
+
     if (Touchpad::init_xinput_extension()) {
         valid = 0;
         return;
@@ -345,7 +348,7 @@ void TouchpadConfig::defaults()
  */
 QString TouchpadConfig::quickHelp() const
 {
-  return QString("<h1>Touchpad</h1> This module allows you to choose options"
+  return i18n("<h1>Touchpad</h1> This module allows you to choose options"
      " for the way in which your touchpad works. The actual effect of"
      " setting these options depends upon the features provided by your"
      " touchpad hardware and the X server on which KDE is running.");
