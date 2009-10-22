@@ -1,0 +1,330 @@
+# kcm_touchpad polish translation
+# Copyright (C) 2009 Michał Żarłok
+# This file is distributed under the same license as the kcm_touchpad package.
+# Michał Żarłok <mishaaq@gmail.com>, 2009.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-22 12:24+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Michał Żarłok <mishaaq@gmail.com>\n"
+"Language-Team: PL <pl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: rc.cpp:3
+msgid "Form"
+msgstr ""
+
+#: rc.cpp:6
+msgid "General"
+msgstr "Ogólne"
+
+#: rc.cpp:9
+msgid "Touchpad"
+msgstr "Touchpad"
+
+#: rc.cpp:12
+msgid "Touchpad is enabled."
+msgstr "Touchpad jest włączony."
+
+#: rc.cpp:15
+msgid "On"
+msgstr "Włączony"
+
+#: rc.cpp:18
+msgid "Touchpad is switched off."
+msgstr "Touchpad jest wyłączony."
+
+#: rc.cpp:21
+msgid "Off"
+msgstr "Wyłączony"
+
+#: rc.cpp:24
+msgid "Only tapping and scrolling is switched off."
+msgstr "Tylko puknięcia i przewijanie są wyłączone."
+
+#: rc.cpp:27
+msgid "Allow moving"
+msgstr "Zezwól na poruszanie"
+
+#: rc.cpp:30
+msgid "Smart Mode"
+msgstr "Tryb inteligentny"
+
+#: rc.cpp:33
+msgid "Disable touchpad when typing"
+msgstr "Zablokuj touchpad podczas pisania"
+
+#: rc.cpp:36
+msgid "Re-enable delay:"
+msgstr "Opóźnienie odblokowania:"
+
+#: rc.cpp:39 rc.cpp:195 rc.cpp:207 rc.cpp:219 rc.cpp:228
+msgid "100"
+msgstr ""
+
+#: rc.cpp:42
+msgid "ms"
+msgstr ""
+
+#: rc.cpp:45
+msgid "Touch Sensitivity"
+msgstr "Czułość dotyku"
+
+#: rc.cpp:48 rc.cpp:72 rc.cpp:108
+msgid "Low"
+msgstr "Mała"
+
+#: rc.cpp:51 rc.cpp:66 rc.cpp:111
+msgid "High"
+msgstr "Duża"
+
+#: rc.cpp:54 rc.cpp:57
+msgid "Scrolling"
+msgstr "Przewijanie"
+
+#: rc.cpp:60
+msgid "Enable vertical scrolling when dragging along the right edge."
+msgstr "Włącz pionowe przewijanie podczas przeciągania wzdłuż prawego brzegu."
+
+#: rc.cpp:63
+msgid "Enable Vertical Scrolling"
+msgstr "Włącz pionowe przewijanie"
+
+#: rc.cpp:69
+msgid "Move distance of the finger for a vertical scroll event."
+msgstr "Przemieszczenie palca do rozpoczęcia pionowego przewijania."
+
+#: rc.cpp:75
+msgid "Enable horizontal scrolling when dragging along the bottom edge."
+msgstr "Włącz poziome przewijanie podczas przeciągania wzdłuż dolnego brzegu."
+
+#: rc.cpp:78
+msgid "Enable Horizontal Scrolling"
+msgstr "Włącz poziome przewijanie"
+
+#: rc.cpp:81
+msgid "Advanced"
+msgstr "Zaawansowane"
+
+#: rc.cpp:84
+msgid "Enable edge scrolling to continue after the finger is released."
+msgstr "Włącz ciągłe przewijanie wzdłuż krawędzi po oderwaniu palca."
+
+#: rc.cpp:87
+msgid "Enable Coasting"
+msgstr "Włącz ciągłe przewijanie"
+
+#: rc.cpp:90
+msgid "Coasting threshold scrolling speed."
+msgstr "Prędkość ciągłego przewijania"
+
+#: rc.cpp:93 rc.cpp:171
+msgid "Slow"
+msgstr "Powoli"
+
+#: rc.cpp:96 rc.cpp:177
+msgid "Fast"
+msgstr "Szybko"
+
+#: rc.cpp:99
+msgid ""
+"Enable edge scrolling to continue while the finger stays in an edge corner."
+msgstr "Włącz ciągłe przewijanie gdy palec zostaje w rogu."
+
+#: rc.cpp:102
+msgid "Enabled Corner Coasting"
+msgstr "Włącz ciągłe przewijanie w rogach"
+
+#: rc.cpp:105
+msgid "Move distance of the finger for a horizontal scroll event."
+msgstr "Przemieszczenie palca do rozpoczęcia poziomego przewijania."
+
+#: rc.cpp:114
+msgid ""
+"Enable vertical scrolling when dragging with two fingers anywhere on the "
+"touchpad."
+msgstr "Włącz pionowe przewijanie podczas ciągnęcia dwóch palców po touchpadzie."
+
+#: rc.cpp:117
+msgid "Enable Vertical Two Fingers Scrolling"
+msgstr "Włącz pionowe przewijanie dwoma palcami"
+
+#: rc.cpp:120
+msgid ""
+"Enable horizontal scrolling when dragging with two fingers anywhere on the "
+"touchpad."
+msgstr "Włacz poziome przewijanie podczas ciągnięcia dwóch palców po touchpadzie."
+
+#: rc.cpp:123
+msgid "Enable Horizontal Two Fingers Scrolling"
+msgstr "Włącz poziome przewijanie dwoma palcami"
+
+#: rc.cpp:126
+msgid "Circular Scrolling"
+msgstr "Kołowe przewijanie"
+
+#: rc.cpp:129
+msgid "If on, circular scrolling is used."
+msgstr "Jeśli zaznaczono, kołowe przewijanie jest włączone."
+
+#: rc.cpp:132
+msgid "Enable Circular Scrolling"
+msgstr "Włącz kołowe przewijanie"
+
+#: rc.cpp:135
+msgid "Trigger region on the touchpad to start circular scrolling."
+msgstr "Region na touchpadzie uruchamiający kołowe przewijanie."
+
+#: rc.cpp:138
+msgid "Triggered by:"
+msgstr "Uruchomienie w:"
+
+#: rc.cpp:141
+msgid "All Corners"
+msgstr "Wszędzie"
+
+#: rc.cpp:144
+msgid "Top Edge"
+msgstr "Górny brzeg"
+
+#: rc.cpp:147
+msgid "Top-Right Corner"
+msgstr "Prawy-górny róg"
+
+#: rc.cpp:150
+msgid "Right Edge"
+msgstr "Prawy brzeg"
+
+#: rc.cpp:153
+msgid "Bottom-Right Corner"
+msgstr "Prawy-dolny róg"
+
+#: rc.cpp:156
+msgid "Bottom Edge"
+msgstr "Dolny brzeg"
+
+#: rc.cpp:159
+msgid "Bottom-Left Corner"
+msgstr "Lewy-dolny róg"
+
+#: rc.cpp:162
+msgid "Left Edge"
+msgstr "Lewy brzeg"
+
+#: rc.cpp:165
+msgid "Top-Left Edge"
+msgstr "Lewy-górny róg"
+
+#: rc.cpp:168
+msgid "No Trigger"
+msgstr "Nigdzie"
+
+#: rc.cpp:174
+msgid "Move angle (radians) of finger to generate a scroll event."
+msgstr "Odcinek po obwodzie wykonany palcem do wygenerowania zdarzenia przewijania."
+
+#: rc.cpp:180 rc.cpp:237
+msgid "Tapping"
+msgstr "Puknięcie"
+
+#: rc.cpp:183
+msgid "Emulation"
+msgstr "Emulacja"
+
+#: rc.cpp:186
+msgid "Enable Tapping"
+msgstr "Włącz puknięcia"
+
+#: rc.cpp:189
+msgid "Timeout after a tap to recognize it as a single tap."
+msgstr ""
+
+#: rc.cpp:192
+msgid "Single Tap Timeout:"
+msgstr ""
+
+#: rc.cpp:198 rc.cpp:210 rc.cpp:222
+msgid "ms."
+msgstr ""
+
+#: rc.cpp:201
+msgid "Maximum time (in milliseconds) for detecting a double tap."
+msgstr ""
+
+#: rc.cpp:204
+msgid "Double Tap Time:"
+msgstr ""
+
+#: rc.cpp:213
+msgid "The duration of the mouse click generated by tapping."
+msgstr ""
+
+#: rc.cpp:216
+msgid "Click Time:"
+msgstr ""
+
+#: rc.cpp:225
+msgid "Max Tap Move:"
+msgstr ""
+
+#: rc.cpp:231
+msgid "pts."
+msgstr ""
+
+#: rc.cpp:234
+msgid "Buttons"
+msgstr ""
+
+#: rc.cpp:240
+msgid "Right-Top Corner"
+msgstr ""
+
+#: rc.cpp:243
+msgid "Right-Bottom Corner"
+msgstr ""
+
+#: rc.cpp:246
+msgid "Left-Top Corner"
+msgstr ""
+
+#: rc.cpp:249
+msgid "Left-Bottom Corner"
+msgstr ""
+
+#: rc.cpp:252
+msgid "One Finger"
+msgstr ""
+
+#: rc.cpp:255
+msgid "Two Fingers"
+msgstr ""
+
+#: rc.cpp:258
+msgid "Three Fingers"
+msgstr ""
+
+#: rc.cpp:261
+msgid "means"
+msgstr ""
+
+#: rc.cpp:264
+msgid "None"
+msgstr ""
+
+#: rc.cpp:267
+msgid "Left Button"
+msgstr ""
+
+#: rc.cpp:270
+msgid "Middle Button"
+msgstr ""
+
+#: rc.cpp:273
+msgid "Right Button"
+msgstr ""

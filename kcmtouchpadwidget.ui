@@ -592,7 +592,7 @@
              <bool>false</bool>
             </property>
             <property name="toolTip">
-             <string>Enable vertical scrolling when dragging with two fingers anywhere on the touchpad.</string>
+             <string>Enable horizontal scrolling when dragging with two fingers anywhere on the touchpad.</string>
             </property>
             <property name="text">
              <string>Enable Horizontal Two Fingers Scrolling</string>

@@ -36,6 +36,8 @@
 #include <KPluginFactory>
 #include <KPluginLoader>
 #include <KMessageBox>
+#include <KLocale>
+
 #include <math.h>
 
 #include "kcmtouchpad.h"
