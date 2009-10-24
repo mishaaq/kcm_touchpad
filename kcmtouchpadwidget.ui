@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>548</width>
-    <height>526</height>
+    <width>544</width>
+    <height>522</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,6 +18,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
+   <string/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -489,7 +490,7 @@
                 <string>Enable edge scrolling to continue while the finger stays in an edge corner.</string>
                </property>
                <property name="text">
-                <string>Enabled Corner Coasting</string>
+                <string>Enable Corner Coasting</string>
                </property>
               </widget>
              </item>
@@ -701,7 +702,7 @@
               </item>
               <item>
                <property name="text">
-                <string>Top-Left Edge</string>
+                <string>Top-Left Corner</string>
                </property>
               </item>
               <item>

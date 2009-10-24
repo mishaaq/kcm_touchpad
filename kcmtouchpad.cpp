@@ -410,7 +410,7 @@ bool TouchpadConfig::apply()
         Touchpad::set_parameter("CircScrollDelta", ui->ScrollCircularSpeedS->value());
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_CIRCULAR_SCROLLING_TRIGGER)) {
-        Touchpad::set_parameter("CircScrollTrigger", (Synaptics::ScrollTrigger)ui->ScrollCircularCornersCBB->currentIndex());
+        Touchpad::set_parameter("CircScrollTrigger", ui->ScrollCircularCornersCBB->currentIndex());
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_TAP_TIME)) {
         Touchpad::set_parameter("MaxTapTime", (int)ui->TappingEnableCB->isChecked() * 180);
@@ -424,13 +424,13 @@ bool TouchpadConfig::apply()
         Touchpad::set_parameter("ClickTime", ui->TappingClickTimeValueS->value());
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_TAP_ACTION)) {
-        Touchpad::set_parameter("TapButton1", (Synaptics::Button)this->tappingButtonsMap[Synaptics::OneFinger]);
-        Touchpad::set_parameter("TapButton2", (Synaptics::Button)this->tappingButtonsMap[Synaptics::TwoFingers]);
-        Touchpad::set_parameter("TapButton3", (Synaptics::Button)this->tappingButtonsMap[Synaptics::ThreeFingers]);
-        Touchpad::set_parameter("RTCornerButton", (Synaptics::Button)this->tappingButtonsMap[Synaptics::RightTop]);
-        Touchpad::set_parameter("RBCornerButton", (Synaptics::Button)this->tappingButtonsMap[Synaptics::RightBottom]);
-        Touchpad::set_parameter("LTCornerButton", (Synaptics::Button)this->tappingButtonsMap[Synaptics::LeftTop]);
-        Touchpad::set_parameter("LBCornerButton", (Synaptics::Button)this->tappingButtonsMap[Synaptics::LeftBottom]);
+        Touchpad::set_parameter("TapButton1", this->tappingButtonsMap[Synaptics::OneFinger]);
+        Touchpad::set_parameter("TapButton2", this->tappingButtonsMap[Synaptics::TwoFingers]);
+        Touchpad::set_parameter("TapButton3", this->tappingButtonsMap[Synaptics::ThreeFingers]);
+        Touchpad::set_parameter("RTCornerButton", this->tappingButtonsMap[Synaptics::RightTop]);
+        Touchpad::set_parameter("RBCornerButton", this->tappingButtonsMap[Synaptics::RightBottom]);
+        Touchpad::set_parameter("LTCornerButton", this->tappingButtonsMap[Synaptics::LeftTop]);
+        Touchpad::set_parameter("LBCornerButton", this->tappingButtonsMap[Synaptics::LeftBottom]);
     }
 
     return true;
@@ -682,13 +682,13 @@ void TouchpadConfig::init_touchpad()
         Touchpad::set_parameter("ClickTime", config.readEntry("ClickTime", -1));
     }
     if (propertiesList.contains(SYNAPTICS_PROP_TAP_ACTION)) {
-        Touchpad::set_parameter("TapButton1", (Synaptics::Button)config.readEntry("TapButton1", -1));
-        Touchpad::set_parameter("TapButton2", (Synaptics::Button)config.readEntry("TapButton2", -1));
-        Touchpad::set_parameter("TapButton3", (Synaptics::Button)config.readEntry("TapButton3", -1));
-        Touchpad::set_parameter("RTCornerButton", (Synaptics::Button)config.readEntry("RTCornerButton", -1));
-        Touchpad::set_parameter("RBCornerButton", (Synaptics::Button)config.readEntry("RBCornerButton", -1));
-        Touchpad::set_parameter("LTCornerButton", (Synaptics::Button)config.readEntry("LTCornerButton", -1));
-        Touchpad::set_parameter("LBCornerButton", (Synaptics::Button)config.readEntry("LBCornerButton", -1));
+        Touchpad::set_parameter("TapButton1", config.readEntry("TapButton1", -1));
+        Touchpad::set_parameter("TapButton2", config.readEntry("TapButton2", -1));
+        Touchpad::set_parameter("TapButton3", config.readEntry("TapButton3", -1));
+        Touchpad::set_parameter("RTCornerButton", config.readEntry("RTCornerButton", -1));
+        Touchpad::set_parameter("RBCornerButton", config.readEntry("RBCornerButton", -1));
+        Touchpad::set_parameter("LTCornerButton", config.readEntry("LTCornerButton", -1));
+        Touchpad::set_parameter("LBCornerButton", config.readEntry("LBCornerButton", -1));
     }
 
     Touchpad::free_xinput_extension();
