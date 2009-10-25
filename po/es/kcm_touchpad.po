@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-25 01:36+0200\n"
+"POT-Creation-Date: 2009-10-25 17:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,333 +15,329 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: rc.cpp:3 rc.cpp:273
+#: rc.cpp:3
 msgid "General"
 msgstr ""
 
-#: rc.cpp:6 rc.cpp:276
+#: rc.cpp:6
 msgid "Touchpad"
 msgstr "Touchpad"
 
-#: rc.cpp:9 rc.cpp:279
+#: rc.cpp:9
 msgid "Touchpad is enabled."
 msgstr ""
 
-#: rc.cpp:12 rc.cpp:282
+#: rc.cpp:12
 msgid "On"
 msgstr ""
 
-#: rc.cpp:15 rc.cpp:285
+#: rc.cpp:15
 msgid "Touchpad is switched off."
 msgstr ""
 
-#: rc.cpp:18 rc.cpp:288
+#: rc.cpp:18
 msgid "Off"
 msgstr ""
 
-#: rc.cpp:21 rc.cpp:291
+#: rc.cpp:21
 msgid "Only tapping and scrolling is switched off."
 msgstr ""
 
-#: rc.cpp:24 rc.cpp:294
+#: rc.cpp:24
 msgid "Allow moving"
 msgstr ""
 
-#: rc.cpp:27 rc.cpp:297
+#: rc.cpp:27
+msgid "Informations"
+msgstr ""
+
+#: rc.cpp:30
+#, fuzzy
+msgid "Touchpad Name:"
+msgstr "Touchpad"
+
+#: rc.cpp:33
+msgid "Device not found"
+msgstr ""
+
+#: rc.cpp:36
 msgid "Smart Mode"
 msgstr ""
 
-#: rc.cpp:30 rc.cpp:300
+#: rc.cpp:39
 msgid "Disable touchpad when typing"
 msgstr ""
 
-#: rc.cpp:33 rc.cpp:303
+#: rc.cpp:42
 msgid "Re-enable delay:"
 msgstr ""
 
-#: rc.cpp:36 rc.cpp:192 rc.cpp:204 rc.cpp:216 rc.cpp:225 rc.cpp:306 rc.cpp:462
-#: rc.cpp:474 rc.cpp:486 rc.cpp:495
+#: rc.cpp:45 rc.cpp:201 rc.cpp:213 rc.cpp:225 rc.cpp:234
 msgid "100"
 msgstr ""
 
-#: rc.cpp:39 rc.cpp:309
+#: rc.cpp:48
 msgid "ms"
 msgstr ""
 
-#: rc.cpp:42 rc.cpp:312
+#: rc.cpp:51
 msgid "Touch Sensitivity"
 msgstr ""
 
-#: rc.cpp:45 rc.cpp:69 rc.cpp:105 rc.cpp:315 rc.cpp:339 rc.cpp:375
+#: rc.cpp:54 rc.cpp:78 rc.cpp:114
 msgid "Low"
 msgstr ""
 
-#: rc.cpp:48 rc.cpp:63 rc.cpp:108 rc.cpp:318 rc.cpp:333 rc.cpp:378
+#: rc.cpp:57 rc.cpp:72 rc.cpp:117
 msgid "High"
 msgstr ""
 
-#: rc.cpp:51 rc.cpp:54 rc.cpp:321 rc.cpp:324
+#: rc.cpp:60 rc.cpp:63
 msgid "Scrolling"
 msgstr ""
 
-#: rc.cpp:57 rc.cpp:327
+#: rc.cpp:66
 msgid "Enable vertical scrolling when dragging along the right edge."
 msgstr ""
 
-#: rc.cpp:60 rc.cpp:330
+#: rc.cpp:69
 msgid "Enable Vertical Scrolling"
 msgstr ""
 
-#: rc.cpp:66 rc.cpp:336
+#: rc.cpp:75
 msgid "Move distance of the finger for a vertical scroll event."
 msgstr ""
 
-#: rc.cpp:72 rc.cpp:342
+#: rc.cpp:81
 msgid "Enable horizontal scrolling when dragging along the bottom edge."
 msgstr ""
 
-#: rc.cpp:75 rc.cpp:345
+#: rc.cpp:84
 msgid "Enable Horizontal Scrolling"
 msgstr ""
 
-#: rc.cpp:78 rc.cpp:348
+#: rc.cpp:87
 msgid "Advanced"
 msgstr ""
 
-#: rc.cpp:81 rc.cpp:351
+#: rc.cpp:90
 msgid "Enable edge scrolling to continue after the finger is released."
 msgstr ""
 
-#: rc.cpp:84 rc.cpp:354
+#: rc.cpp:93
 msgid "Enable Coasting"
 msgstr ""
 
-#: rc.cpp:87 rc.cpp:357
+#: rc.cpp:96
 msgid "Coasting threshold scrolling speed."
 msgstr ""
 
-#: rc.cpp:90 rc.cpp:168 rc.cpp:360 rc.cpp:438
+#: rc.cpp:99 rc.cpp:177
 msgid "Slow"
 msgstr ""
 
-#: rc.cpp:93 rc.cpp:174 rc.cpp:363 rc.cpp:444
+#: rc.cpp:102 rc.cpp:183
 msgid "Fast"
 msgstr ""
 
-#: rc.cpp:96 rc.cpp:366
+#: rc.cpp:105
 msgid ""
 "Enable edge scrolling to continue while the finger stays in an edge corner."
 msgstr ""
 
-#: rc.cpp:99 rc.cpp:369
+#: rc.cpp:108
 msgid "Enable Corner Coasting"
 msgstr ""
 
-#: rc.cpp:102 rc.cpp:372
+#: rc.cpp:111
 msgid "Move distance of the finger for a horizontal scroll event."
 msgstr ""
 
-#: rc.cpp:111 rc.cpp:381
+#: rc.cpp:120
 msgid ""
 "Enable vertical scrolling when dragging with two fingers anywhere on the "
 "touchpad."
 msgstr ""
 
-#: rc.cpp:114 rc.cpp:384
+#: rc.cpp:123
 msgid "Enable Vertical Two Fingers Scrolling"
 msgstr ""
 
-#: rc.cpp:117 rc.cpp:387
+#: rc.cpp:126
 msgid ""
 "Enable horizontal scrolling when dragging with two fingers anywhere on the "
 "touchpad."
 msgstr ""
 
-#: rc.cpp:120 rc.cpp:390
+#: rc.cpp:129
 msgid "Enable Horizontal Two Fingers Scrolling"
 msgstr ""
 
-#: rc.cpp:123 rc.cpp:393
+#: rc.cpp:132
 msgid "Circular Scrolling"
 msgstr ""
 
-#: rc.cpp:126 rc.cpp:396
+#: rc.cpp:135
 msgid "If on, circular scrolling is used."
 msgstr ""
 
-#: rc.cpp:129 rc.cpp:399
+#: rc.cpp:138
 msgid "Enable Circular Scrolling"
 msgstr ""
 
-#: rc.cpp:132 rc.cpp:402
+#: rc.cpp:141
 msgid "Trigger region on the touchpad to start circular scrolling."
 msgstr ""
 
-#: rc.cpp:135 rc.cpp:405
+#: rc.cpp:144
 msgid "Triggered by:"
 msgstr ""
 
-#: rc.cpp:138 rc.cpp:408
+#: rc.cpp:147
 msgid "All Corners"
 msgstr ""
 
-#: rc.cpp:141 rc.cpp:411
+#: rc.cpp:150
 msgid "Top Edge"
 msgstr ""
 
-#: rc.cpp:144 rc.cpp:414
+#: rc.cpp:153
 msgid "Top-Right Corner"
 msgstr ""
 
-#: rc.cpp:147 rc.cpp:417
+#: rc.cpp:156
 msgid "Right Edge"
 msgstr ""
 
-#: rc.cpp:150 rc.cpp:420
+#: rc.cpp:159
 msgid "Bottom-Right Corner"
 msgstr ""
 
-#: rc.cpp:153 rc.cpp:423
+#: rc.cpp:162
 msgid "Bottom Edge"
 msgstr ""
 
-#: rc.cpp:156 rc.cpp:426
+#: rc.cpp:165
 msgid "Bottom-Left Corner"
 msgstr ""
 
-#: rc.cpp:159 rc.cpp:429
+#: rc.cpp:168
 msgid "Left Edge"
 msgstr ""
 
-#: rc.cpp:162 rc.cpp:432
+#: rc.cpp:171
 msgid "Top-Left Corner"
 msgstr ""
 
-#: rc.cpp:165 rc.cpp:435
+#: rc.cpp:174
 msgid "No Trigger"
 msgstr ""
 
-#: rc.cpp:171 rc.cpp:441
+#: rc.cpp:180
 msgid "Move angle (radians) of finger to generate a scroll event."
 msgstr ""
 
-#: rc.cpp:177 rc.cpp:234 rc.cpp:447 rc.cpp:504
+#: rc.cpp:186 rc.cpp:243
 msgid "Tapping"
 msgstr ""
 
-#: rc.cpp:180 rc.cpp:450
+#: rc.cpp:189
 msgid "Emulation"
 msgstr ""
 
-#: rc.cpp:183 rc.cpp:453
+#: rc.cpp:192
 msgid "Enable Tapping"
 msgstr ""
 
-#: rc.cpp:186 rc.cpp:456
+#: rc.cpp:195
 msgid "Timeout after a tap to recognize it as a single tap."
 msgstr ""
 
-#: rc.cpp:189 rc.cpp:459
+#: rc.cpp:198
 msgid "Single Tap Timeout:"
 msgstr ""
 
-#: rc.cpp:195 rc.cpp:207 rc.cpp:219 rc.cpp:465 rc.cpp:477 rc.cpp:489
+#: rc.cpp:204 rc.cpp:216 rc.cpp:228
 msgid "ms."
 msgstr ""
 
-#: rc.cpp:198 rc.cpp:468
+#: rc.cpp:207
 msgid "Maximum time (in milliseconds) for detecting a double tap."
 msgstr ""
 
-#: rc.cpp:201 rc.cpp:471
+#: rc.cpp:210
 msgid "Double Tap Time:"
 msgstr ""
 
-#: rc.cpp:210 rc.cpp:480
+#: rc.cpp:219
 msgid "The duration of the mouse click generated by tapping."
 msgstr ""
 
-#: rc.cpp:213 rc.cpp:483
+#: rc.cpp:222
 msgid "Click Time:"
 msgstr ""
 
-#: rc.cpp:222 rc.cpp:492
+#: rc.cpp:231
 msgid "Max Tap Move:"
 msgstr ""
 
-#: rc.cpp:228 rc.cpp:498
+#: rc.cpp:237
 msgid "pts."
 msgstr ""
 
-#: rc.cpp:231 rc.cpp:501
+#: rc.cpp:240
 msgid "Buttons"
 msgstr ""
 
-#: rc.cpp:237 rc.cpp:507
+#: rc.cpp:246
 msgid "Right-Top Corner"
 msgstr ""
 
-#: rc.cpp:240 rc.cpp:510
+#: rc.cpp:249
 msgid "Right-Bottom Corner"
 msgstr ""
 
-#: rc.cpp:243 rc.cpp:513
+#: rc.cpp:252
 msgid "Left-Top Corner"
 msgstr ""
 
-#: rc.cpp:246 rc.cpp:516
+#: rc.cpp:255
 msgid "Left-Bottom Corner"
 msgstr ""
 
-#: rc.cpp:249 rc.cpp:519
+#: rc.cpp:258
 msgid "One Finger"
 msgstr ""
 
-#: rc.cpp:252 rc.cpp:522
+#: rc.cpp:261
 msgid "Two Fingers"
 msgstr ""
 
-#: rc.cpp:255 rc.cpp:525
+#: rc.cpp:264
 msgid "Three Fingers"
 msgstr ""
 
-#: rc.cpp:258 rc.cpp:528
+#: rc.cpp:267
 msgid "means"
 msgstr ""
 
-#: rc.cpp:261 rc.cpp:531
+#: rc.cpp:270
 msgid "None"
 msgstr ""
 
-#: rc.cpp:264 rc.cpp:534
+#: rc.cpp:273
 msgid "Left Button"
 msgstr ""
 
-#: rc.cpp:267 rc.cpp:537
+#: rc.cpp:276
 msgid "Middle Button"
 msgstr ""
 
-#: rc.cpp:270 rc.cpp:540
+#: rc.cpp:279
 msgid "Right Button"
 msgstr ""
 
-#: kcmtouchpad.cpp:60
-msgid "Could not get display! Are you running in X environment?"
-msgstr ""
-
-#: kcmtouchpad.cpp:60 kcmtouchpad.cpp:62 kcmtouchpad.cpp:64
-msgid "Error"
-msgstr ""
-
-#: kcmtouchpad.cpp:62
-msgid "Could not get device! Is \"synaptics\" driver installed and loaded?"
-msgstr ""
-
-#: kcmtouchpad.cpp:64
-msgid "Unknown error!"
-msgstr ""
-
-#: kcmtouchpad.cpp:357
+#: kcmtouchpad.cpp:351
 msgid ""
 "<h1>Touchpad</h1> This module allows you to choose options for the way in "
 "which your touchpad works. The actual effect of setting these options "
