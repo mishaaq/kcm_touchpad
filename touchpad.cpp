@@ -364,6 +364,7 @@ const void*
 Touchpad::get_parameter(const char* name) {
     if (display && device)
         return dp_get_parameter(display, device, name);
+    return NULL;
 }
 
 void
