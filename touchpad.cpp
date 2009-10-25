@@ -31,6 +31,7 @@
 #include <X11/extensions/XInput.h>
 
 #include <strings.h>
+#include <string.h>
 #include <math.h>
 #include <map>
 
@@ -38,8 +39,9 @@
 
 int xi_opcode;
 
-Display* display   = NULL;
-XDevice* device     = NULL;
+Display* display        = NULL;
+XDevice* device         = NULL;
+char* dev_name          = NULL;
 
 struct ltstr
 {
@@ -153,6 +155,9 @@ dp_get_device(Display *dpy)
                 error = 1;
                 goto unwind;
             }
+
+            dev_name = strdup(info[ndevices].name);
+            printf("Recognized device: %s\n", dev_name);
 
             break; /* Yay, device is suitable */
         }
@@ -373,6 +378,12 @@ Touchpad::set_parameter(const char* name, double variable) {
         dp_set_parameter(display, device, name, variable);
 }
 
+const char*
+Touchpad::get_device_name() {
+    return dev_name;
+}
+
+
 int
 Touchpad::free_xinput_extension() {
     if (display && device) {
@@ -383,6 +394,7 @@ Touchpad::free_xinput_extension() {
 
     free(parameters_map);
     free(properties_list);
+    free(dev_name);
 
     return 0;
 }

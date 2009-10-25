@@ -151,6 +151,8 @@ namespace Touchpad {
     const prop_list* get_properties_list();
     const void* get_parameter(const char* name);
     void set_parameter(const char* name, double variable);
+
+    const char* get_device_name();
 }
 
 namespace Synaptics {

@@ -54,17 +54,7 @@ TouchpadConfig::TouchpadConfig(QWidget *parent, const QVariantList &)
     // Load translations
     KGlobal::locale()->insertCatalog("kcm_touchpad");
 
-    int returnValue;
-    if ((returnValue = Touchpad::init_xinput_extension()) < 0) {
-        switch (returnValue) {
-            case GET_DISPLAY_FAILED: KMessageBox::error(parent, i18n("Could not get display! Are you running in X environment?"), i18n("Error"));
-                                     break;
-            case GET_DEVICE_FAILED: KMessageBox::error(parent, i18n("Could not get device! Is \"synaptics\" driver installed and loaded?"), i18n("Error"));
-                                    break;
-            default: KMessageBox::error(parent, i18n("Unknown error!"), i18n("Error"));
-        }
-        setup_failed = true;
-    }
+    int returnValue = Touchpad::init_xinput_extension();
 
     const prop_list* properties_list = Touchpad::get_properties_list();
     if (properties_list)
@@ -76,7 +66,12 @@ TouchpadConfig::TouchpadConfig(QWidget *parent, const QVariantList &)
     ui = new Ui_TouchpadConfigWidget();
     ui->setupUi(this);
 
-    this->enableProperties();
+    if (returnValue >= 0) {
+        ui->DeviceNameValueL->setText(Touchpad::get_device_name());
+        this->enableProperties();
+    }
+    else
+        setup_failed = true;
 
     // we have to connect widgets to corresponding slots
     // "Touchpad On" radio button
