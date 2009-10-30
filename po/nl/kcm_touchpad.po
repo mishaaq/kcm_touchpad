@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-25 17:00+0100\n"
-"PO-Revision-Date: 2009-10-24 21:49+0200\n"
+"PO-Revision-Date: 2009-10-28 09:06+0100\n"
 "Last-Translator: Sander Pientka <cumulus0007@gmail.com>\n"
 "Language-Team: Nederlands <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -50,16 +50,15 @@ msgstr "Bewegen toestaan"
 
 #: rc.cpp:27
 msgid "Informations"
-msgstr ""
+msgstr "Informatie"
 
 #: rc.cpp:30
-#, fuzzy
 msgid "Touchpad Name:"
-msgstr "Touchpad"
+msgstr "Touchpad-naam:"
 
 #: rc.cpp:33
 msgid "Device not found"
-msgstr ""
+msgstr "Apparaat niet gevonden"
 
 #: rc.cpp:36
 msgid "Smart Mode"
@@ -352,3 +351,8 @@ msgid ""
 "depends upon the features provided by your touchpad hardware and the X "
 "server on which KDE is running."
 msgstr ""
+"<h1>Touchpad</h1> Met deze module kunt u de manier waarop uw touchpad  "
+"werkt aanpassen. Het daadwerkelijke effect van de ingestelde opties "
+"hangt af van de ondersteunde functies van uw touchpad en de X-server "
+"waarop KDE draait."
+
