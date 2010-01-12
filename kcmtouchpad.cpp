@@ -655,7 +655,7 @@ void TouchpadConfig::init_touchpad()
         Touchpad::set_parameter("HorizTwoFingerScroll", config.readEntry("HorizTwoFingerScroll", -1));
     }
     if (propertiesList.contains(SYNAPTICS_PROP_COASTING_SPEED)) {
-        Touchpad::set_parameter("CoastingSpeed", config.readEntry("CoastingSpeed", -1));
+        Touchpad::set_parameter("CoastingSpeed", config.readEntry("CoastingSpeed", -1.0));
     }
     if (propertiesList.contains(SYNAPTICS_PROP_CIRCULAR_SCROLLING)) {
         Touchpad::set_parameter("CircularScrolling", config.readEntry("CircularScrolling", -1));
