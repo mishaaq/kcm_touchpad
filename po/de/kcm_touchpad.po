@@ -1,0 +1,353 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kcm_touchpad\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-25 17:00+0100\n"
+"PO-Revision-Date: 2009-12-27 00:13+0100\n"
+"Last-Translator: Volker Härtel <folkyvolk@gmx.de>\n"
+"Language-Team: H.H. <cyberbeat@gmx.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: rc.cpp:3
+msgid "General"
+msgstr "Allgemein"
+
+#: rc.cpp:6
+msgid "Touchpad"
+msgstr ""
+
+#: rc.cpp:9
+msgid "Touchpad is enabled."
+msgstr "Touchpad ist aktiviert."
+
+#: rc.cpp:12
+msgid "On"
+msgstr "An"
+
+#: rc.cpp:15
+msgid "Touchpad is switched off."
+msgstr "Touchpad ist deaktiviert."
+
+#: rc.cpp:18
+msgid "Off"
+msgstr "Aus"
+
+#: rc.cpp:21
+msgid "Only tapping and scrolling is switched off."
+msgstr "Nur Tippen und Scrollen ist ausgeschaltet."
+
+#: rc.cpp:24
+msgid "Allow moving"
+msgstr ""
+
+#: rc.cpp:27
+msgid "Informations"
+msgstr "Informationen"
+
+#: rc.cpp:30
+msgid "Touchpad Name:"
+msgstr ""
+
+#: rc.cpp:33
+msgid "Device not found"
+msgstr "Gerät nicht gefunden"
+
+#: rc.cpp:36
+msgid "Smart Mode"
+msgstr "Intelligenter Modus"
+
+#: rc.cpp:39
+msgid "Disable touchpad when typing"
+msgstr "Touchpad beim Tippen deaktivieren"
+
+#: rc.cpp:42
+msgid "Re-enable delay:"
+msgstr "Wieder-Aktivierungs-Verzögerung:"
+
+#: rc.cpp:45
+#: rc.cpp:201
+#: rc.cpp:213
+#: rc.cpp:225
+#: rc.cpp:234
+msgid "100"
+msgstr ""
+
+#: rc.cpp:48
+msgid "ms"
+msgstr ""
+
+#: rc.cpp:51
+msgid "Touch Sensitivity"
+msgstr "Druckempfindlichkeit"
+
+#: rc.cpp:54
+#: rc.cpp:78
+#: rc.cpp:114
+msgid "Low"
+msgstr "Wenig"
+
+#: rc.cpp:57
+#: rc.cpp:72
+#: rc.cpp:117
+msgid "High"
+msgstr "Stark"
+
+#: rc.cpp:60
+#: rc.cpp:63
+msgid "Scrolling"
+msgstr "Scrollen"
+
+#: rc.cpp:66
+msgid "Enable vertical scrolling when dragging along the right edge."
+msgstr "Vertikales Scrollen durch Ziehen am rechten Rand erlauben."
+
+#: rc.cpp:69
+msgid "Enable Vertical Scrolling"
+msgstr "Vertikales Scrollen aktivieren"
+
+#: rc.cpp:75
+msgid "Move distance of the finger for a vertical scroll event."
+msgstr "Bewerbungsdistanz des Fingers für ein vertikales Scroll Ereignis"
+
+#: rc.cpp:81
+msgid "Enable horizontal scrolling when dragging along the bottom edge."
+msgstr "Horizontales Scrollen durch ziehen am unteren Rand erlauben"
+
+#: rc.cpp:84
+msgid "Enable Horizontal Scrolling"
+msgstr "Horizontales Scrollen aktivieren"
+
+#: rc.cpp:87
+msgid "Advanced"
+msgstr "Erweitert"
+
+#: rc.cpp:90
+msgid "Enable edge scrolling to continue after the finger is released."
+msgstr "Erlaube fortgesetztes Scrollen am Rand nach Loslassen des Fingers."
+
+#: rc.cpp:93
+msgid "Enable Coasting"
+msgstr ""
+
+#: rc.cpp:96
+msgid "Coasting threshold scrolling speed."
+msgstr ""
+
+#: rc.cpp:99
+#: rc.cpp:177
+msgid "Slow"
+msgstr "Langsam"
+
+#: rc.cpp:102
+#: rc.cpp:183
+msgid "Fast"
+msgstr "Schnell"
+
+#: rc.cpp:105
+msgid "Enable edge scrolling to continue while the finger stays in an edge corner."
+msgstr "Erlaube Weiterscrollen während der Finger in einer Ecke bleibt."
+
+#: rc.cpp:108
+msgid "Enable Corner Coasting"
+msgstr ""
+
+#: rc.cpp:111
+msgid "Move distance of the finger for a horizontal scroll event."
+msgstr "Bewerbungsdistanz des Fingers für ein horizontales Scroll Ereignis"
+
+#: rc.cpp:120
+msgid "Enable vertical scrolling when dragging with two fingers anywhere on the touchpad."
+msgstr "Erlaube vertikales Scrollen durch ziehen mit zwei Fingern auf beliebiger Position des Touchpads."
+
+#: rc.cpp:123
+msgid "Enable Vertical Two Fingers Scrolling"
+msgstr "Erlaube Vertikales Zwei Finger Scrollen"
+
+#: rc.cpp:126
+msgid "Enable horizontal scrolling when dragging with two fingers anywhere on the touchpad."
+msgstr "Erlaube horizontales Scrollen durch ziehen mit zwei Fingern auf beliebiger Position des Touchpads."
+
+#: rc.cpp:129
+msgid "Enable Horizontal Two Fingers Scrolling"
+msgstr "Erlaube Horizontales Zwei Finger Scrollen"
+
+#: rc.cpp:132
+msgid "Circular Scrolling"
+msgstr "Kreisendes Scrollen"
+
+#: rc.cpp:135
+msgid "If on, circular scrolling is used."
+msgstr "Fall aktiviert, wird kreisendes Scrollen benutzt."
+
+#: rc.cpp:138
+msgid "Enable Circular Scrolling"
+msgstr "Erlaube kreisendes Scrollen"
+
+#: rc.cpp:141
+msgid "Trigger region on the touchpad to start circular scrolling."
+msgstr "Auslösende Region auf dem Touchpad um kreisendes Scrollen zu starten."
+
+#: rc.cpp:144
+msgid "Triggered by:"
+msgstr "Ausgelöst von:"
+
+#: rc.cpp:147
+msgid "All Corners"
+msgstr "Alle Ecken"
+
+#: rc.cpp:150
+msgid "Top Edge"
+msgstr "Oberer Rand"
+
+#: rc.cpp:153
+msgid "Top-Right Corner"
+msgstr "Obere rechte Ecke"
+
+#: rc.cpp:156
+msgid "Right Edge"
+msgstr "Rechter Rand"
+
+#: rc.cpp:159
+msgid "Bottom-Right Corner"
+msgstr "Untere rechte Ecke"
+
+#: rc.cpp:162
+msgid "Bottom Edge"
+msgstr "Unterer Rand"
+
+#: rc.cpp:165
+msgid "Bottom-Left Corner"
+msgstr "Untere linke Ecke"
+
+#: rc.cpp:168
+msgid "Left Edge"
+msgstr "Linker Rand"
+
+#: rc.cpp:171
+msgid "Top-Left Corner"
+msgstr "Obere linke Ecke"
+
+#: rc.cpp:174
+msgid "No Trigger"
+msgstr "Kein Auslöser"
+
+#: rc.cpp:180
+msgid "Move angle (radians) of finger to generate a scroll event."
+msgstr "Bewegungswinkel (radians) des Fingers um ein Scroll-Ereignis zu erzeugen."
+
+#: rc.cpp:186
+#: rc.cpp:243
+msgid "Tapping"
+msgstr "Tippen"
+
+#: rc.cpp:189
+msgid "Emulation"
+msgstr ""
+
+#: rc.cpp:192
+msgid "Enable Tapping"
+msgstr "Tippen erlauben"
+
+#: rc.cpp:195
+msgid "Timeout after a tap to recognize it as a single tap."
+msgstr "Zeit nach einem Tippen, um es als einzelnes Tippen zu erkennen."
+
+#: rc.cpp:198
+msgid "Single Tap Timeout:"
+msgstr "Zeitüberschreitung für einzelnes Tippen "
+
+#: rc.cpp:204
+#: rc.cpp:216
+#: rc.cpp:228
+msgid "ms."
+msgstr ""
+
+#: rc.cpp:207
+msgid "Maximum time (in milliseconds) for detecting a double tap."
+msgstr "Maximale Zeit (in Millisekungen) um ein Doppel-Tippen zu erkennen."
+
+#: rc.cpp:210
+msgid "Double Tap Time:"
+msgstr "Zeit für ein Doppel-Tippen"
+
+#: rc.cpp:219
+msgid "The duration of the mouse click generated by tapping."
+msgstr "Dauer des durch Tippen erzeugten Mausklicks."
+
+#: rc.cpp:222
+msgid "Click Time:"
+msgstr "Klick Dauer"
+
+#: rc.cpp:231
+msgid "Max Tap Move:"
+msgstr "Maximale Bewegung beim Tippen:"
+
+#: rc.cpp:237
+msgid "pts."
+msgstr ""
+
+#: rc.cpp:240
+msgid "Buttons"
+msgstr "Knöpfe"
+
+#: rc.cpp:246
+msgid "Right-Top Corner"
+msgstr "Rechte obere Ecke"
+
+#: rc.cpp:249
+msgid "Right-Bottom Corner"
+msgstr "Rechte untere Ecke"
+
+#: rc.cpp:252
+msgid "Left-Top Corner"
+msgstr "Linke obere Ecke"
+
+#: rc.cpp:255
+msgid "Left-Bottom Corner"
+msgstr "Linke untere Ecke"
+
+#: rc.cpp:258
+msgid "One Finger"
+msgstr "Ein Finger"
+
+#: rc.cpp:261
+msgid "Two Fingers"
+msgstr "Zwei Finger"
+
+#: rc.cpp:264
+msgid "Three Fingers"
+msgstr "Drei Finger"
+
+#: rc.cpp:267
+msgid "means"
+msgstr "bedeutet"
+
+#: rc.cpp:270
+msgid "None"
+msgstr "Kein"
+
+#: rc.cpp:273
+msgid "Left Button"
+msgstr "Linker Knopf"
+
+#: rc.cpp:276
+msgid "Middle Button"
+msgstr "Mittlerer Knopf"
+
+#: rc.cpp:279
+msgid "Right Button"
+msgstr "Rechter Knopf"
+
+#: kcmtouchpad.cpp:351
+msgid "<h1>Touchpad</h1> This module allows you to choose options for the way in which your touchpad works. The actual effect of setting these options depends upon the features provided by your touchpad hardware and the X server on which KDE is running."
+msgstr "<h1>Touchpad</h1> Diese Modul erlaubt Einstellungen des Verhaltens Ihres Touchpads. Der Effekt dieser Einstellungen hängt von den Möglichkeiten Ihres Touchpads und dem von KDE verwendeten X Server ab."
+
