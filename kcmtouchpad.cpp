@@ -355,6 +355,28 @@ QString TouchpadConfig::quickHelp() const
 }
 
 /*
+ * This function applies sensitivity setting to driver.
+ * It is a bit tricky because driver (hardware?) will refuse to apply
+ * out of order values (i.e. you cannot set upper limit less than current
+ * low limit and vice versa).
+*/
+void TouchpadConfig::applySensitivity(int val)
+{
+    int oldLow = *(int*)Touchpad::get_parameter("FingerLow");
+    int oldHigh = *(int*)Touchpad::get_parameter("FingerHigh");
+    int newLow = val * 10 + 1;
+    int newHigh = val * 10 + 6;
+
+    if (newLow < oldHigh) {
+	Touchpad::set_parameter("FingerLow", newLow);
+	Touchpad::set_parameter("FingerHigh", newHigh);
+    } else {
+	Touchpad::set_parameter("FingerHigh", newHigh);
+	Touchpad::set_parameter("FingerLow", newLow);
+    }
+}
+
+/*
  * This function applies changes to driver.
  * It gets value from every widget and calls corresponding function
  * which saves this value to SHM
@@ -376,8 +398,7 @@ bool TouchpadConfig::apply()
     //Touchpad::setSmartModeEnabled(ui->SmartModeEnableCB->isChecked(), ui->SmartModeDelayS->value() / 1000);
 
     if (this->propertiesList.contains(SYNAPTICS_PROP_FINGER)) {
-        Touchpad::set_parameter("FingerLow", ui->SensitivityValueS->value() * 10 + 1);
-        Touchpad::set_parameter("FingerHigh", ui->SensitivityValueS->value() * 10 + 6);
+	applySensitivity(ui->SensitivityValueS->value());
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_SCROLL_EDGE)) {
         Touchpad::set_parameter("VertEdgeScroll", ui->ScrollVertEnableCB->isChecked());
@@ -635,8 +656,7 @@ void TouchpadConfig::init_touchpad()
     if (propertiesList.contains(SYNAPTICS_PROP_FINGER)) {
         int value;
         if ((value = config.readEntry("FingerLow", -1)) != -1) {
-            Touchpad::set_parameter("FingerLow", value * 10 + 1);
-            Touchpad::set_parameter("FingerHigh", value * 10 + 6);
+	    applySensitivity(value);
         }
     }
     if (propertiesList.contains(SYNAPTICS_PROP_SCROLL_EDGE)) {

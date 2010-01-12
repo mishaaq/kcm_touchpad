@@ -54,6 +54,7 @@ public:
 
 private:
     bool apply();
+    static void applySensitivity(int val);
     void enableProperties();
 
     Ui_TouchpadConfigWidget* ui;
