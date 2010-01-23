@@ -153,7 +153,8 @@ void TouchpadConfig::enableProperties() {
             ui->ScrollCoastingCornerEnableCB->setEnabled(true);
         }
     }
-    if (this->propertiesList.contains(SYNAPTICS_PROP_SCROLL_TWOFINGER)) {
+    if (this->propertiesList.contains(SYNAPTICS_PROP_SCROLL_TWOFINGER) &&
+	 Touchpad::capability("_CapTwoFingers")) {
         ui->ScrollVertTFEnableCB->setEnabled(true);
         ui->ScrollHorizTFEnableCB->setEnabled(true);
     }
@@ -168,6 +169,11 @@ void TouchpadConfig::enableProperties() {
     }
     if (this->propertiesList.contains(SYNAPTICS_PROP_TAP_ACTION)) {
         ui->TappingButtonLW->setEnabled(true);
+	/* Do not offer events Touchpad does not claim to support */
+	if (!Touchpad::capability("_CapTwoFingers"))
+	    ui->TappingEventLW->item(Synaptics::TwoFingers)->setHidden(true);
+	if (!Touchpad::capability("_CapThreeFingers"))
+	    ui->TappingEventLW->item(Synaptics::ThreeFingers)->setHidden(true);
         ui->TappingEventLW->setEnabled(true);
         ui->ButtonTappingL->setEnabled(true);
         ui->ButtonMeansL->setEnabled(true);
