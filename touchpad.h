@@ -140,6 +140,11 @@ static struct Parameter params[] = {
     {"AreaRightEdge",         PT_INT,    0, 10000, SYNAPTICS_PROP_AREA,	32,	1},
     {"AreaTopEdge",           PT_INT,    0, 10000, SYNAPTICS_PROP_AREA,	32,	2},
     {"AreaBottomEdge",        PT_INT,    0, 10000, SYNAPTICS_PROP_AREA,	32,	3},
+    {"_CapLeftButton",        PT_BOOL,   0, 1,     SYNAPTICS_PROP_CAPABILITIES,	8,	0},
+    {"_CapMiddleButton",      PT_BOOL,   0, 1,     SYNAPTICS_PROP_CAPABILITIES,	8,	1},
+    {"_CapRightButton",       PT_BOOL,   0, 1,     SYNAPTICS_PROP_CAPABILITIES,	8,	2},
+    {"_CapTwoFingers",        PT_BOOL,   0, 1,     SYNAPTICS_PROP_CAPABILITIES,	8,	3},
+    {"_CapThreeFingers",      PT_BOOL,   0, 1,     SYNAPTICS_PROP_CAPABILITIES,	8,	4},
     { NULL, ParaType(0), 0, 0, 0, 0, 0           }
 };
 
@@ -151,6 +156,8 @@ namespace Touchpad {
     const prop_list* get_properties_list();
     const void* get_parameter(const char* name);
     void set_parameter(const char* name, double variable);
+
+    bool capability(const char* name);
 
     const char* get_device_name();
 }

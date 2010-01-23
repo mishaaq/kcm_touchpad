@@ -378,6 +378,19 @@ Touchpad::set_parameter(const char* name, double variable) {
         dp_set_parameter(display, device, name, variable);
 }
 
+bool
+Touchpad::capability(const char* name) {
+    if (display && device) {
+	char *cap;
+
+	cap = (char *)dp_get_parameter(display, device, name);
+	if (cap)
+	    return *cap == 1;
+    }
+
+    return true;
+}
+
 const char*
 Touchpad::get_device_name() {
     return dev_name;
