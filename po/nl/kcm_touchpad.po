@@ -2,14 +2,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Sander Pientka <cumulus0007@gmail.com>, 2009.
+# Kristof Bal <kristof.bal@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-25 17:00+0100\n"
-"PO-Revision-Date: 2009-10-28 09:06+0100\n"
-"Last-Translator: Sander Pientka <cumulus0007@gmail.com>\n"
-"Language-Team: Nederlands <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2010-02-01 18:22+0100\n"
+"Last-Translator: Kristof Bal <kristof.bal@gmail.com>\n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -110,7 +111,7 @@ msgstr "Wijzig de vingerafstand voor een verticale scroll-gebeurtenis."
 
 #: rc.cpp:81
 msgid "Enable horizontal scrolling when dragging along the bottom edge."
-msgstr "Verticaal scrollen wanneer gesleept wordt langs de onderzijde."
+msgstr "Horizontaal scrollen wanneer gesleept wordt langs de onderzijde."
 
 #: rc.cpp:84
 msgid "Enable Horizontal Scrolling"
@@ -355,4 +356,5 @@ msgstr ""
 "werkt aanpassen. Het daadwerkelijke effect van de ingestelde opties "
 "hangt af van de ondersteunde functies van uw touchpad en de X-server "
 "waarop KDE draait."
+
 
