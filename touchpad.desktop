@@ -16,5 +16,6 @@ X-KDE-Weight=50
 Name=Touchpad
 
 Comment=Touchpad settings
+Comment[nl]=Touchpad instellen
 
 X-KDE-Keywords=Touchpad,Synaptics
