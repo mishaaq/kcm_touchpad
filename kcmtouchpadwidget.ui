@@ -152,7 +152,7 @@
           <item row="0" column="0" colspan="3">
            <widget class="QCheckBox" name="SmartModeEnableCB">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
              <string>Disable touchpad when typing</string>

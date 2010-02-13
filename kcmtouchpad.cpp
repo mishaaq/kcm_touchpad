@@ -49,7 +49,8 @@ K_PLUGIN_FACTORY(TouchpadConfigFactory, registerPlugin<TouchpadConfig>("touchpad
 K_EXPORT_PLUGIN(TouchpadConfigFactory("kcmtouchpad"))
 
 TouchpadConfig::TouchpadConfig(QWidget *parent, const QVariantList &)
-        : KCModule(TouchpadConfigFactory::componentData(), parent), setup_failed(false)
+        : KCModule(TouchpadConfigFactory::componentData(), parent),
+	setup_failed(false)
 {
     // Load translations
     KGlobal::locale()->insertCatalog("kcm_touchpad");
@@ -79,8 +80,8 @@ TouchpadConfig::TouchpadConfig(QWidget *parent, const QVariantList &)
     // "Touchpad Allow Moving" check box
     connect(ui->TouchpadOffWOMoveCB, SIGNAL(toggled(bool)), this, SLOT(touchpadAllowedMoving(bool)));
 
-    //connect(ui->SmartModeEnableCB, SIGNAL(toggled(bool)), this, SLOT(smartModeEnabled(bool)));
-    //connect(ui->SmartModeDelayS, SIGNAL(valueChanged(int)), this, SLOT(smartModeDelayChanged(int)));
+    connect(ui->SmartModeEnableCB, SIGNAL(toggled(bool)), this, SLOT(smartModeEnabled(bool)));
+    connect(ui->SmartModeDelayS, SIGNAL(valueChanged(int)), this, SLOT(smartModeDelayChanged(int)));
 
     // "Touch Sensitivity" slider
     connect(ui->SensitivityValueS, SIGNAL(valueChanged(int)), this, SLOT(sensitivityValueChanged(int)));
@@ -199,8 +200,8 @@ void TouchpadConfig::load()
         ui->TouchpadOffWOMoveCB->setCheckState(config.readEntry("TouchpadOff", (int)*(char*)Touchpad::get_parameter("TouchpadOff")) == 2 ? Qt::Checked : Qt::Unchecked);
     }
 
-    //ui->SmartModeEnableCB->setCheckState(config.readEntry("SmartModeEnabled", false) ? Qt::Checked : Qt::Unchecked);
-    //ui->SmartModeDelayS->setValue(config.readEntry("SmartModeDelay", 1000));
+    ui->SmartModeEnableCB->setCheckState(config.readEntry("SmartModeEnabled", false) ? Qt::Checked : Qt::Unchecked);
+    ui->SmartModeDelayS->setValue(config.readEntry("SmartModeDelay", 1000));
 
     if (this->propertiesList.contains(SYNAPTICS_PROP_FINGER)) {
         ui->SensitivityValueS->setValue(config.readEntry("FingerLow", *(int*)Touchpad::get_parameter("FingerLow") / 10));
@@ -280,8 +281,8 @@ void TouchpadConfig::save()
             config.writeEntry("TouchpadOff", 0);
     }
 
-    //config.writeEntry("SmartModeEnabled", ui->SmartModeEnableCB->isChecked());
-    //config.writeEntry("SmartModeDelay", ui->SmartModeDelayS->value());
+    config.writeEntry("SmartModeEnabled", ui->SmartModeEnableCB->isChecked());
+    config.writeEntry("SmartModeDelay", ui->SmartModeDelayS->value());
 
     if (this->propertiesList.contains(SYNAPTICS_PROP_FINGER)) {
         config.writeEntry("FingerLow", ui->SensitivityValueS->value());
@@ -361,6 +362,30 @@ QString TouchpadConfig::quickHelp() const
 }
 
 /*
+ * Call ksyndaemon to start or stop touchpad activity monitoring.
+ * FIXME could do with some error handling
+ */
+void TouchpadConfig::setSmartMode(bool enable, unsigned interval)
+{
+    QDBusInterface interface("org.kde.ksyndaemon",
+	"/Syndaemon",
+	"org.kde.KSyndaemon",
+	QDBusConnection::sessionBus());
+
+    // FIXME currently subsecond resolution is not supported
+    interval /= 1000;
+    if (interval == 0)
+	interval = 1;
+
+    if (enable) {
+	interface.call("setInterval", interval);
+	interface.call("startMonitoring");
+    } else {
+	interface.call("stopMonitoring");
+    }
+}
+
+/*
  * This function applies sensitivity setting to driver.
  * It is a bit tricky because driver (hardware?) will refuse to apply
  * out of order values (i.e. you cannot set upper limit less than current
@@ -401,7 +426,7 @@ bool TouchpadConfig::apply()
             Touchpad::set_parameter("TouchpadOff", 0);
     }
 
-    //Touchpad::setSmartModeEnabled(ui->SmartModeEnableCB->isChecked(), ui->SmartModeDelayS->value() / 1000);
+    setSmartMode(ui->SmartModeEnableCB->isChecked(), ui->SmartModeDelayS->value());
 
     if (this->propertiesList.contains(SYNAPTICS_PROP_FINGER)) {
 	applySensitivity(ui->SensitivityValueS->value());
@@ -476,16 +501,16 @@ void TouchpadConfig::touchpadAllowedMoving(bool toggle) {
 }
 
 void TouchpadConfig::smartModeEnabled(bool toggle) {
-    /*emit this->changed();
+    emit this->changed();
 
     ui->SmartModeDelayL->setEnabled(toggle);
     ui->SmartModeDelayS->setEnabled(toggle);
     ui->SmartModeDelayValueL->setEnabled(toggle);
-    ui->SmartModeDelayMilisecondsL->setEnabled(toggle);*/
+    ui->SmartModeDelayMilisecondsL->setEnabled(toggle);
 }
 
 void TouchpadConfig::smartModeDelayChanged(int value) {
-//    emit this->changed();
+    emit this->changed();
 }
 
 void TouchpadConfig::sensitivityValueChanged(int value) {
@@ -656,8 +681,8 @@ void TouchpadConfig::init_touchpad()
         Touchpad::set_parameter("TouchpadOff", config.readEntry("TouchpadOff", -1));
     }
 
-//    Touchpad::setSmartModeEnabled(config.readEntry("SmartModeEnabled", Touchpad::isSmartModeEnabled()),
-//                           config.readEntry("SmartModeDelay", 1000));
+    setSmartMode(config.readEntry("SmartModeEnabled", false),
+                           config.readEntry("SmartModeDelay", 1000));
 
     if (propertiesList.contains(SYNAPTICS_PROP_FINGER)) {
         int value;

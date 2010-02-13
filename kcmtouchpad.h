@@ -28,6 +28,7 @@
 
 #include <QSet>
 #include <QString>
+#include <QtDBus/QtDBus>
 
 #include <KApplication>
 #include <KCModule>
@@ -55,6 +56,7 @@ public:
 private:
     bool apply();
     static void applySensitivity(int val);
+    static void setSmartMode(bool enable, unsigned interval);
     void enableProperties();
 
     Ui_TouchpadConfigWidget* ui;
@@ -65,7 +67,7 @@ private:
     QSet<const char*> propertiesList;
 
     bool setup_failed;
-    
+
 private slots:
     void changed();
 
