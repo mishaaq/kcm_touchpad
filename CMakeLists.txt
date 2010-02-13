@@ -10,7 +10,7 @@ set( kcm_touchpad_PART_SRCS
     touchpad.cpp
 )
 
-include_directories( ${CMAKE_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_BUILD_DIR}
+include_directories( ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_BUILD_DIR}
     ${QT_INCLUDES}
     ${KDE4_INCLUDES}
 )
@@ -34,3 +34,6 @@ install( FILES touchpad.desktop DESTINATION  ${SERVICES_INSTALL_DIR} )
 install( FILES AUTHORS README LICENSE DESTINATION ${SHARE_INSTALL_PREFIX}/doc/kcm_touchpad )
 
 #install( FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/translations )
+
+########### ksyndaemon #########
+add_subdirectory ( ksyndaemon )

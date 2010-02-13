@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Service
+Name=KSyndaemon
+Comment=KDE Synaptics touchpad activity monitor
+X-DBUS-ServiceName=org.kde.ksyndaemon
+X-DBUS-StartupType=Unique
+X-KDE-StartupNotify=false
