@@ -1,0 +1,361 @@
+# This file is put in the public domain.
+#
+# Julien Papasian <julien.papasian@gmail.com>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-25 17:00+0100\n"
+"PO-Revision-Date: 2012-02-20 17:23+0100\n"
+"Last-Translator: Julien Papasian <julien.papasian@gmail.com>\n"
+"Language-Team: French <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: rc.cpp:3
+msgid "General"
+msgstr "Général"
+
+#: rc.cpp:6
+msgid "Touchpad"
+msgstr "Pavé tactile"
+
+#: rc.cpp:9
+msgid "Touchpad is enabled."
+msgstr "Le pavé tactile est activé. "
+
+#: rc.cpp:12
+msgid "On"
+msgstr "Activé"
+
+#: rc.cpp:15
+msgid "Touchpad is switched off."
+msgstr "Le pavé tactile est désactivé."
+
+#: rc.cpp:18
+msgid "Off"
+msgstr "Désactivé"
+
+#: rc.cpp:21
+msgid "Only tapping and scrolling is switched off."
+msgstr "Seuls le tapotement et le défilement sont désactivés. "
+
+#: rc.cpp:24
+msgid "Allow moving"
+msgstr "Autoriser le déplacement"
+
+#: rc.cpp:27
+msgid "Informations"
+msgstr "Informations"
+
+#: rc.cpp:30
+msgid "Touchpad Name:"
+msgstr "Nom du pavé tactile :"
+
+#: rc.cpp:33
+msgid "Device not found"
+msgstr "Dispositif non trouvé"
+
+#: rc.cpp:36
+msgid "Smart Mode"
+msgstr "Mode intelligent"
+
+#: rc.cpp:39
+msgid "Disable touchpad when typing"
+msgstr "Désactiver le pavé tactile lors de la saisie"
+
+#: rc.cpp:42
+msgid "Re-enable delay:"
+msgstr "Délai de réactivation"
+
+#: rc.cpp:45 rc.cpp:201 rc.cpp:213 rc.cpp:225 rc.cpp:234
+msgid "100"
+msgstr "100"
+
+#: rc.cpp:48
+msgid "ms"
+msgstr "ms"
+
+#: rc.cpp:51
+msgid "Touch Sensitivity"
+msgstr "Sensibilité du toucher"
+
+#: rc.cpp:54 rc.cpp:78 rc.cpp:114
+msgid "Low"
+msgstr "Faible"
+
+#: rc.cpp:57 rc.cpp:72 rc.cpp:117
+msgid "High"
+msgstr "Élevée"
+
+#: rc.cpp:60 rc.cpp:63
+msgid "Scrolling"
+msgstr "Défilement"
+
+#: rc.cpp:66
+msgid "Enable vertical scrolling when dragging along the right edge."
+msgstr ""
+"Activer le défilement vertical quand je fais un glisser-déplacer sur le "
+"rebord droit."
+
+#: rc.cpp:69
+msgid "Enable Vertical Scrolling"
+msgstr "Activer le défilement vertical"
+
+#: rc.cpp:75
+msgid "Move distance of the finger for a vertical scroll event."
+msgstr "Distance de déplacement du doigt sur un défilement vertical."
+
+#: rc.cpp:81
+msgid "Enable horizontal scrolling when dragging along the bottom edge."
+msgstr ""
+"Activer le défilement horizontal quand je fais un glisser-déplacer sur le "
+"rebord du bas."
+
+#: rc.cpp:84
+msgid "Enable Horizontal Scrolling"
+msgstr "Activer le défilement horizontal"
+
+#: rc.cpp:87
+msgid "Advanced"
+msgstr "Avancé"
+
+#: rc.cpp:90
+msgid "Enable edge scrolling to continue after the finger is released."
+msgstr ""
+"Continuer le défilement sur un rebord après que le doigt ait été relâché."
+
+#: rc.cpp:93
+msgid "Enable Coasting"
+msgstr "Activer le défilement sur un rebord"
+
+#: rc.cpp:96
+msgid "Coasting threshold scrolling speed."
+msgstr "Vitesse de défilement sur un rebord"
+
+#: rc.cpp:99 rc.cpp:177
+msgid "Slow"
+msgstr "Lent"
+
+#: rc.cpp:102 rc.cpp:183
+msgid "Fast"
+msgstr "Rapide"
+
+#: rc.cpp:105
+msgid ""
+"Enable edge scrolling to continue while the finger stays in an edge corner."
+msgstr ""
+"Continuer le défilement sur un rebord quand le doigt se situe dans un coin."
+
+#: rc.cpp:108
+msgid "Enable Corner Coasting"
+msgstr "Activer le défilement sur un rebord dans les coins"
+
+#: rc.cpp:111
+msgid "Move distance of the finger for a horizontal scroll event."
+msgstr "Distance de déplacement du doigt sur un défilement horizontal."
+
+#: rc.cpp:120
+msgid ""
+"Enable vertical scrolling when dragging with two fingers anywhere on the "
+"touchpad."
+msgstr ""
+"Activer le défilement vertical quand je fais un glisser-déplacer avec deux "
+"doigts n’importe où sur le pavé tactile."
+
+#: rc.cpp:123
+msgid "Enable Vertical Two Fingers Scrolling"
+msgstr "Activer le défilement vertical à deux doigts"
+
+#: rc.cpp:126
+msgid ""
+"Enable horizontal scrolling when dragging with two fingers anywhere on the "
+"touchpad."
+msgstr ""
+"Activer le défilement horizontal quand je fais un glisser-déplacer avec deux "
+"doigts n’importe où sur le pavé tactile."
+
+#: rc.cpp:129
+msgid "Enable Horizontal Two Fingers Scrolling"
+msgstr "Activer le défilement horizontal à deux doigts"
+
+#: rc.cpp:132
+msgid "Circular Scrolling"
+msgstr "Défilement circulaire"
+
+#: rc.cpp:135
+msgid "If on, circular scrolling is used."
+msgstr "Si sélectionné, le défilement circulaire sera activé."
+
+#: rc.cpp:138
+msgid "Enable Circular Scrolling"
+msgstr "Activer le défilement circulaire"
+
+#: rc.cpp:141
+msgid "Trigger region on the touchpad to start circular scrolling."
+msgstr "Point de départ du défilement circulaire du pavé tactile."
+
+#: rc.cpp:144
+msgid "Triggered by:"
+msgstr "Point de départ :"
+
+#: rc.cpp:147
+msgid "All Corners"
+msgstr "Tous les coins"
+
+#: rc.cpp:150
+msgid "Top Edge"
+msgstr "Rebord du haut"
+
+#: rc.cpp:153
+msgid "Top-Right Corner"
+msgstr "Coin en haut à droite"
+
+#: rc.cpp:156
+msgid "Right Edge"
+msgstr "Rebord droit"
+
+#: rc.cpp:159
+msgid "Bottom-Right Corner"
+msgstr "Coin en bas à droite"
+
+#: rc.cpp:162
+msgid "Bottom Edge"
+msgstr "Rebord du bas"
+
+#: rc.cpp:165
+msgid "Bottom-Left Corner"
+msgstr "Coin en bas à gauche"
+
+#: rc.cpp:168
+msgid "Left Edge"
+msgstr "Rebord gauche"
+
+#: rc.cpp:171
+msgid "Top-Left Corner"
+msgstr "Coin en haut à gauche"
+
+#: rc.cpp:174
+msgid "No Trigger"
+msgstr "Pas de point de départ"
+
+#: rc.cpp:180
+msgid "Move angle (radians) of finger to generate a scroll event."
+msgstr ""
+"Angle de déplacement (en radians) du doigt qui doit générer un défilement."
+
+#: rc.cpp:186 rc.cpp:243
+msgid "Tapping"
+msgstr "Tapotement"
+
+#: rc.cpp:189
+msgid "Emulation"
+msgstr "Émulation"
+
+#: rc.cpp:192
+msgid "Enable Tapping"
+msgstr "Activer le tapotement"
+
+#: rc.cpp:195
+msgid "Timeout after a tap to recognize it as a single tap."
+msgstr "Délai après lequel un tapotement est considéré comme un simple appui."
+
+#: rc.cpp:198
+msgid "Single Tap Timeout:"
+msgstr "Délai d’un appui simple :"
+
+#: rc.cpp:204 rc.cpp:216 rc.cpp:228
+msgid "ms."
+msgstr "ms."
+
+#: rc.cpp:207
+msgid "Maximum time (in milliseconds) for detecting a double tap."
+msgstr "Délai maximum (en millisecondes) pour détecter un double appui. "
+
+#: rc.cpp:210
+msgid "Double Tap Time:"
+msgstr "Délai d’un appui double :"
+
+#: rc.cpp:219
+msgid "The duration of the mouse click generated by tapping."
+msgstr "Durée du clic de souris généré par le tapotement."
+
+#: rc.cpp:222
+msgid "Click Time:"
+msgstr "Durée de clic :"
+
+#: rc.cpp:231
+msgid "Max Tap Move:"
+msgstr "Déplacement max à l’appui :"
+
+#: rc.cpp:237
+msgid "pts."
+msgstr "pts."
+
+#: rc.cpp:240
+msgid "Buttons"
+msgstr "Boutons"
+
+#: rc.cpp:246
+msgid "Right-Top Corner"
+msgstr "Dans le coin en haut à droite"
+
+#: rc.cpp:249
+msgid "Right-Bottom Corner"
+msgstr "Dans le coin en bas à droite"
+
+#: rc.cpp:252
+msgid "Left-Top Corner"
+msgstr "Dans le coin en haut à gauche"
+
+#: rc.cpp:255
+msgid "Left-Bottom Corner"
+msgstr "Dans le coin en bas à gauche"
+
+#: rc.cpp:258
+msgid "One Finger"
+msgstr "Avec un doigt"
+
+#: rc.cpp:261
+msgid "Two Fingers"
+msgstr "Avec deux doigts"
+
+#: rc.cpp:264
+msgid "Three Fingers"
+msgstr "Avec trois doigts"
+
+#: rc.cpp:267
+msgid "means"
+msgstr "représente"
+
+#: rc.cpp:270
+msgid "None"
+msgstr "Rien"
+
+#: rc.cpp:273
+msgid "Left Button"
+msgstr "Le bouton gauche"
+
+#: rc.cpp:276
+msgid "Middle Button"
+msgstr "Le bouton central"
+
+#: rc.cpp:279
+msgid "Right Button"
+msgstr "Le bouton droit"
+
+#: kcmtouchpad.cpp:351
+msgid ""
+"<h1>Touchpad</h1> This module allows you to choose options for the way in "
+"which your touchpad works. The actual effect of setting these options "
+"depends upon the features provided by your touchpad hardware and the X "
+"server on which KDE is running."
+msgstr ""
+"<h1>Pavé tactile</h1> (Touchpad) Ce module vous permet de choisir les options "
+"de fonctionnement de votre pavé tactile. L’efficacité de ces options dépend "
+"des capacités de votre matériel et du serveur X sur lequel KDE fonctionne."
+
